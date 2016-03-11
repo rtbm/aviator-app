@@ -1,6 +1,6 @@
 class WeatherApiService {
   constructor(Config, $http, GlobalsService) {
-    "ngInject";
+    'ngInject';
     this.Config = Config;
     this.$http = $http;
     this.GlobalsService = GlobalsService;

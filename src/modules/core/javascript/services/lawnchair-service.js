@@ -1,7 +1,6 @@
 function LawnchairService($q) {
   'ngInject';
-
-  let LawnchairService = function(name, record) {
+  const LawnchairService = function(name, record) {
     this.options = { name, record };
   };
 

@@ -1,6 +1,5 @@
 function DeviceReadyService($q) {
   'ngInject';
-
   function DeviceReadyService(cb) {
     const deferred = $q.defer();
 
