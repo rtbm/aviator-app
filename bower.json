@@ -1,0 +1,32 @@
+{
+  "name": "aviatorApp",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Marcin Bogusz <marcin@bogusz.cc>"
+  ],
+  "license": "Non-free",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "hammerjs": "hammer.js#^2.0.6",
+    "icomoon-bower": "icomoon#^0.1.0",
+    "jquery": "^2.2.1",
+    "angular-animate": "^1.5.0",
+    "angular-resource": "^1.5.0",
+    "angular-sanitize": "^1.5.0",
+    "angular-mocks": "^1.5.0",
+    "angular-messages": "^1.5.0",
+    "angular-translate": "^2.10.0",
+    "angular-ui-router": "^0.2.18",
+    "roboto-fontface": "^0.4.5",
+    "angular-jwt": "^0.0.9",
+    "a0-angular-storage": "^0.0.13",
+    "lawnchair": "^0.6.4"
+  }
+}

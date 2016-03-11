@@ -1,0 +1,16 @@
+{
+  "ACCOUNTS": {
+    "CREATE_AN_ACCOUNT": "Create an account",
+    "LOGIN_TO_EXISTING_ACCOUNT": "Login to existing account",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Password",
+    "SIGNIN": "Signin",
+    "SIGNUP": "Signup",
+    "RETYPE_PASSWORD": "Retype password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "BACK": "Back",
+    "ERROR_409": "Account already exist.",
+    "ERROR_422": "Bad credentials or account not exist",
+    "ERROR_DEFAULT": "Error occured. Try again later."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "Config": {
+    "api": "http://localhost:3000",
+    "weather_api_key": "cf997161c5f8917f5590033ac10ff8f9",
+    "languages": {
+      "available": ["en"],
+      "fallback": "en"
+    }
+  }
+}

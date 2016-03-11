@@ -1,0 +1,79 @@
+@import '../../../../assets/colors.less';
+
+.accounts {
+  display: block;
+  background: url(images/account.jpg) center top no-repeat;
+
+  .overlay {
+    background: rgba(0, 0, 0, .8);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+
+    & > .content {
+      color: @lightgray;
+      text-align: center;
+
+      & > .form {
+        font-family: sans-serif;
+        display: block;
+        background: #fff;
+        padding: 1rem 2rem;
+        margin: 1rem 0 1.5rem;
+        border-radius: .5rem;
+
+        & > label {
+          display: block;
+          padding: 1rem 0;
+
+          span, input {
+            display: inline-block;
+            vertical-align: bottom;
+          }
+
+          span {
+            font-size: 1.1rem;
+            line-height: 1.3rem;
+            text-align: left;
+            color: @darkgray;
+            font-weight: 700;
+            width: 7rem;
+            text-transform: uppercase;
+          }
+
+          input {
+            max-width: 155px;
+          }
+        }
+      }
+
+      & > .actions {
+        text-align: center;
+
+        button {
+          width: 13.3rem;
+
+          &:nth-child(1) {
+            margin: 0 .5rem 0 0;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    bottom: 5rem;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+  }
+}

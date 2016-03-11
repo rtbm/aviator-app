@@ -1,0 +1,61 @@
+@import '../../../../assets/colors.less';
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font: 1.4rem/1.6em 'Roboto';
+}
+
+.view, .container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+button, input {
+  font-family: 'Roboto';
+  border: 0 none;
+  outline: 0;
+  font-size: 1.4rem;
+}
+
+input[type="text"], input[type="tel"], input[type="password"] {
+  border-bottom: 1px solid @darkgray;
+  padding: .5rem 0;
+  font-size: 1.3rem;
+}
+
+button {
+  color: @darkgray;
+  background: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 1rem;
+  width: 10rem;
+  border-radius: .5rem;
+
+  &.primary {
+    background: @primary;
+
+    &:active {
+      background: lighten(@primary, 20%);
+    }
+  }
+
+  &.secondary {
+    background: @secondary;
+
+    &:active {
+      background: lighten(@secondary, 20%);
+    }
+  }
+}
