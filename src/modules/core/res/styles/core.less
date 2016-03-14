@@ -8,6 +8,10 @@ body {
   font: 1.4rem/1.6em 'Roboto';
 }
 
+p {
+  margin: 0 0 1em;
+}
+
 .view, .container {
   width: 100%;
   height: 100%;
@@ -36,26 +40,46 @@ input[type="text"], input[type="tel"], input[type="password"] {
 
 button {
   color: @darkgray;
-  background: white;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   width: 10rem;
-  border-radius: .5rem;
+  border-radius: .25rem;
+  background: linear-gradient(white, darken(white, 5%));
 
   &.primary {
-    background: @primary;
+    color: white;
+    background: linear-gradient(@primary, darken(@primary, 5%));
 
     &:active {
       background: lighten(@primary, 20%);
     }
   }
 
-  &.secondary {
-    background: @secondary;
+  &.success {
+    color: white;
+    background: linear-gradient(@success, darken(@success, 5%));
 
     &:active {
-      background: lighten(@secondary, 20%);
+      background: lighten(@success, 20%);
+    }
+  }
+
+  &.assertive {
+    color: white;
+    background: linear-gradient(@assertive, darken(@assertive, 5%));
+
+    &:active {
+      background: lighten(@assertive, 20%);
+    }
+  }
+
+  &.minor {
+    color: white;
+    background: linear-gradient(@minor, darken(@minor, 5%));
+
+    &:active {
+      background: lighten(@minor, 20%);
     }
   }
 }

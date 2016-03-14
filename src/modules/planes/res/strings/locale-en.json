@@ -1,0 +1,14 @@
+{
+  "PLANES": {
+    "NAME": "Name",
+    "CREATE": "Create",
+    "ADD_NEW": "Add new",
+    "CREATED_NEW_PLANE": "Created new plane: {{name}}",
+    "UPDATED_PLANE": "Updated plane: {{name}}",
+    "ERROR_OCCURRED": "<p>We're sorry...<br />Error ({{status}}) occurred.</p><p>Try again later!</p>",
+    "OK": "OK",
+    "EDIT": "Edit",
+    "UPDATE": "Update",
+    "DELETE": "Delete"
+  }
+}

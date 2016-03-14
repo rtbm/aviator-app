@@ -6,6 +6,9 @@ function AccountsRoutes($stateProvider) {
       templateUrl: 'accounts/res/layout/accounts-view.html',
       controller: 'AccountsController',
       controllerAs: 'AccountsVM',
+      data: {
+        unprotected: true,
+      },
     });
 }
 

@@ -15,9 +15,8 @@
                 </label>
             </div>
             <div class="actions">
-                <button ng-click="AccountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
-                <button
-                        class="primary" ng-click="AccountsVM.signinAction(AccountsVM.User)"
+                <button class="minor" ng-click="AccountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
+                <button class="primary" ng-click="AccountsVM.signinAction(AccountsVM.User)"
                         translate="ACCOUNTS.SIGNIN"></button>
             </div>
         </div>
@@ -38,15 +37,14 @@
                            placeholder="{{ 'ACCOUNTS.PASSWORD' | translate }}"/>
                 </label>
                 <label>
-                    <span translate="ACCOUNTS.CONFIRM_PASSWORD"></span>
+                    <span translate="ACCOUNTS.RETYPE"></span>
                     <input type="password" ng-model="AccountsVM.User.password_confirmation"
                            placeholder="{{ 'ACCOUNTS.RETYPE_PASSWORD' | translate }}"/>
                 </label>
             </div>
             <div class="actions">
-                <button ng-click="AccountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
-                <button
-                        class="primary" ng-click="AccountsVM.signupAction(AccountsVM.User)"
+                <button class="minor" ng-click="AccountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
+                <button class="success" ng-click="AccountsVM.signupAction(AccountsVM.User)"
                         translate="ACCOUNTS.SIGNUP"></button>
             </div>
         </div>
@@ -54,6 +52,6 @@
 
     <div class="footer">
         <button class="primary" ng-click="AccountsVM.setViewAction('signin')" translate="ACCOUNTS.SIGNIN"></button>
-        <button class="signup" ng-click="AccountsVM.setViewAction('signup')" translate="ACCOUNTS.SIGNUP"></button>
+        <button class="success" ng-click="AccountsVM.setViewAction('signup')" translate="ACCOUNTS.SIGNUP"></button>
     </div>
 </div>

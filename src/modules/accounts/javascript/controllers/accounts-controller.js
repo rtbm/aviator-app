@@ -1,13 +1,21 @@
 class AccountsController {
-  constructor($translate, WeatherService, AccountsService, NotifyService) {
+  constructor($translate, $state, store, WeatherService, NotifyService, AccountsService) {
     'ngInject';
     this.$translate = $translate;
-    this.AccountsService = AccountsService;
-    this.NotifyService = NotifyService;
+    this.$state = $state;
+    this.store = store;
     this.WeatherService = WeatherService;
+    this.NotifyService = NotifyService;
+    this.AccountsService = AccountsService;
 
     this.view = '';
     this.User = {};
+
+    this.onInit();
+  }
+
+  onInit() {
+    this.WeatherService.getWeather().then((weather) => console.log(weather));
   }
 
   setViewAction(name) {
@@ -30,7 +38,8 @@ class AccountsController {
   }
 
   handleResponse(res) {
-    //res.id_token
+    this.store.set('jwt', res.id_token);
+    this.$state.go('app.planesList');
   }
 
   handleError(err) {

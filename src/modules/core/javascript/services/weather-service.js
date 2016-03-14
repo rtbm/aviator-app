@@ -8,8 +8,6 @@ class WeatherService {
     this.WeatherApiService = WeatherApiService;
 
     this.WeatherHistory = new this.LawnchairService('weathers', 'Weather');
-
-    this.getWeather().then((weather) => console.log(weather));
   }
 
   getWeather() {
@@ -40,7 +38,7 @@ class WeatherService {
         }).then((weather) => {
           const weatherData = {
             createdAt: new Date().getTime(),
-            weather
+            weather: weather.data
           };
           this.WeatherHistory.save(weatherData);
 

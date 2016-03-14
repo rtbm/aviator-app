@@ -3,6 +3,7 @@
 .accounts {
   display: block;
   background: url(images/account.jpg) center top no-repeat;
+  background-size: 100%;
 
   .overlay {
     background: rgba(0, 0, 0, .8);
@@ -22,7 +23,6 @@
       text-align: center;
 
       & > .form {
-        font-family: sans-serif;
         display: block;
         background: #fff;
         padding: 1rem 2rem;
@@ -39,12 +39,12 @@
           }
 
           span {
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             line-height: 1.3rem;
             text-align: left;
             color: @darkgray;
             font-weight: 700;
-            width: 7rem;
+            width: 10rem;
             text-transform: uppercase;
           }
 
@@ -58,7 +58,7 @@
         text-align: center;
 
         button {
-          width: 13.3rem;
+          width: 14.6rem;
 
           &:nth-child(1) {
             margin: 0 .5rem 0 0;
@@ -75,5 +75,13 @@
     width: 100%;
     position: absolute;
     z-index: 1;
+
+    button {
+      width: 90%;
+
+      &:nth-child(1) {
+        margin: 0 0 1rem;
+      }
+    }
   }
 }

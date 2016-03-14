@@ -7,7 +7,7 @@
     "SIGNIN": "Signin",
     "SIGNUP": "Signup",
     "RETYPE_PASSWORD": "Retype password",
-    "CONFIRM_PASSWORD": "Confirm password",
+    "RETYPE": "Re-type",
     "BACK": "Back",
     "ERROR_409": "Account already exist.",
     "ERROR_422": "Bad credentials or account not exist",
