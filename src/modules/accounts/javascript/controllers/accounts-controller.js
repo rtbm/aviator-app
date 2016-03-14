@@ -1,21 +1,19 @@
 class AccountsController {
-  constructor($translate, $state, store, WeatherService, NotifyService, AccountsService) {
+  constructor($state, WeatherService, AccountsService) {
     'ngInject';
-    this.$translate = $translate;
     this.$state = $state;
-    this.store = store;
     this.WeatherService = WeatherService;
-    this.NotifyService = NotifyService;
     this.AccountsService = AccountsService;
 
     this.view = '';
-    this.User = {};
 
     this.onInit();
   }
 
   onInit() {
-    this.WeatherService.getWeather().then((weather) => console.log(weather));
+    this.WeatherService.getWeather().then(
+      (weather) => console.log(weather)
+    );
   }
 
   setViewAction(name) {
@@ -24,45 +22,19 @@ class AccountsController {
   }
 
   signinAction(User) {
-    this.AccountsService.signin(User,
-      (res) => this.handleResponse(res),
-      (err) => this.handleError(err)
+    this.AccountsService.signin(User).then(
+      () => this.handleResponse()
     );
   }
 
   signupAction(User) {
-    this.AccountsService.signup(User,
-      (res) => this.handleResponse(res),
-      (err) => this.handleError(err)
+    this.AccountsService.signup(User).then(
+      () => this.handleResponse()
     );
   }
 
-  handleResponse(res) {
-    this.store.set('jwt', res.id_token);
+  handleResponse() {
     this.$state.go('app.planesList');
-  }
-
-  handleError(err) {
-    let message = 'ACCOUNTS.ERROR_DEFAULT';
-
-    switch(err.status) {
-      case 409:
-      {
-        message = 'ACCOUNTS.ERROR_409';
-        break;
-      }
-      case 422:
-      {
-        message = 'ACCOUNTS.ERROR_422';
-        break;
-      }
-    }
-
-    this.$translate([message]).then(
-      (translations) => this.NotifyService.show({
-        text: translations[message]
-      })
-    );
   }
 }
 

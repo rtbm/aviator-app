@@ -1,13 +1,11 @@
-import { PlanesController } from './planes-controller';
-
-class PlanesFormCreateController extends PlanesController {
-  constructor(PlanesService, $translate, DialogService, $state, NotifyService) {
+class PlanesFormCreateController {
+  constructor(PlanesService, $translate, $state, NotifyService, ErrorService) {
     'ngInject';
-    super(PlanesService, $translate, DialogService);
-
     this.$translate = $translate;
     this.$state = $state;
     this.NotifyService = NotifyService;
+    this.PlanesService = PlanesService;
+    this.ErrorService = ErrorService;
 
     this.onInit();
   }
@@ -17,8 +15,9 @@ class PlanesFormCreateController extends PlanesController {
   }
 
   createAction(Plane) {
-    this.create(Plane).then(
-      (res) => this.handleResponse(res)
+    this.PlanesService.save(Plane,
+      (res) => this.handleResponse(res),
+      (err) => this.ErrorService.handleError(err)
     );
   }
 

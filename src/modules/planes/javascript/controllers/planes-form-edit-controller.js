@@ -1,25 +1,27 @@
-import { PlanesController } from './planes-controller';
-
-class PlanesFormEditController extends PlanesController {
-  constructor(PlanesService, $translate, DialogService, $state, NotifyService) {
+class PlanesFormEditController {
+  constructor(PlanesService, $translate, $state, NotifyService, ErrorService) {
     'ngInject';
-    super(PlanesService, $translate, DialogService);
-
     this.$translate = $translate;
     this.$state = $state;
     this.NotifyService = NotifyService;
+    this.PlanesService = PlanesService;
+    this.ErrorService = ErrorService;
 
     this.onInit();
   }
 
   onInit() {
     this.action = 'update';
-    this.Plane = this.get(this.$state.params.planeId);
+    this.PlanesService.get({ planeId: this.$state.params.planeId },
+      (Plane) => { this.Plane = Plane },
+      (err) => this.handleError(err)
+    );
   }
 
   updateAction(Plane) {
-    this.update(Plane).then(
-      (res) => this.handleResponse(res)
+    this.PlanesService.update(Plane,
+      (res) => this.handleResponse(res),
+      (err) => this.ErrorService.handleError(err)
     );
   }
 

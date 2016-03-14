@@ -3,6 +3,19 @@ import './modules/app';
 import './modules/accounts';
 import './modules/planes';
 
+const ngAppConfig = ($compileProvider, $translateProvider, Config) => {
+  'ngInject';
+  $compileProvider.debugInfoEnabled(false);
+  $translateProvider.registerAvailableLanguageKeys(Config.languages.available);
+  $translateProvider.determinePreferredLanguage();
+  $translateProvider.fallbackLanguage(Config.languages.fallback);
+};
+
+const ngAppRun = ($state) => {
+  'ngInject';
+  $state.go('app.planesList');
+};
+
 angular.module('ngApp', [
   'ngAnimate',
   'ngResource',
@@ -18,26 +31,6 @@ angular.module('ngApp', [
   'ngApp.app',
   'ngApp.accounts',
   'ngApp.planes',
-]).config(($compileProvider, Config, $translateProvider, $httpProvider, jwtInterceptorProvider) => {
-  'ngInject';
-  $compileProvider.debugInfoEnabled(false);
-  $translateProvider.registerAvailableLanguageKeys(Config.languages.available);
-  $translateProvider.determinePreferredLanguage();
-  $translateProvider.fallbackLanguage(Config.languages.fallback);
-
-  jwtInterceptorProvider.tokenGetter = (store) => {
-    'ngInject';
-    return store.get('jwt');
-  };
-
-  $httpProvider.interceptors.push('jwtInterceptor');
-}).run(($state, $rootScope, store) => {
-  $rootScope.$on('$stateChangeStart', (e, toState) => {
-    if (!store.get('jwt') && !(!!toState.data && !!toState.data.unprotected)) {
-      e.preventDefault();
-      $state.go('accounts');
-    }
-  });
-
-  $state.go('app.planesList');
-});
+])
+  .config(ngAppConfig)
+  .run(ngAppRun);

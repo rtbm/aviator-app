@@ -1,13 +1,25 @@
 class WeatherService {
-  constructor($q, DeviceReadyService, LawnchairService, GeolocationService, WeatherApiService) {
+  constructor($q, Config, $http, GlobalsService, DeviceReadyService, LawnchairService, GeolocationService) {
     'ngInject';
     this.$q = $q;
+    this.Config = Config;
+    this.$http = $http;
+    this.GlobalsService = GlobalsService;
     this.DeviceReadyService = DeviceReadyService;
     this.LawnchairService = LawnchairService;
     this.GeolocationService = GeolocationService;
-    this.WeatherApiService = WeatherApiService;
 
     this.WeatherHistory = new this.LawnchairService('weathers', 'Weather');
+  }
+
+  getWeatherByLatLng(latitude, longitude) {
+    return this.$http({
+      method: 'GET',
+      skipAuthorization: true,
+      url: `http://api.openweathermap.org/data/2.5/weather?APPID=${this.Config.weather_api_key}`
+      + `&lat=${latitude}&lon=${longitude}&units=metric&lang=`
+      + `${this.GlobalsService.activeLanguage}`
+    });
   }
 
   getWeather() {
@@ -30,7 +42,7 @@ class WeatherService {
           enableHighAccuracy: true
 
         }).then((pos) => {
-          return this.WeatherApiService.getWeatherByLatLng(
+          return this.getWeatherByLatLng(
             pos.coords.latitude,
             pos.coords.longitude
           );

@@ -1,0 +1,6 @@
+{
+  "CORE": {
+    "OK": "OK",
+    "ERROR_OCCURRED": "<p>Ups! We're sorry...<br />Error ({{status}}) occurred.</p><p>Try again later!</p>"
+  }
+}
