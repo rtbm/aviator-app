@@ -1,8 +1,0 @@
-<div class="planes list">
-    <button ui-sref="app.planesFormCreate" translate="PLANES.ADD_NEW"></button>
-    <div class="item plane" ng-repeat="Plane in PlanesListVM.planes">
-        <div ng-bind="Plane.name"></div>
-        <button ui-sref="app.planesFormEdit({ planeId: Plane._id })" translate="PLANES.EDIT"></button>
-        <button ng-click="PlanesListVM.removeAction(Plane)" translate="PLANES.DELETE"></button>
-    </div>
-</div>

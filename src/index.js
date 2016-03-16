@@ -1,7 +1,7 @@
 import './modules/core';
 import './modules/app';
 import './modules/accounts';
-import './modules/planes';
+import './modules/articles';
 
 const ngAppConfig = ($compileProvider, $translateProvider, Config) => {
   'ngInject';
@@ -13,7 +13,7 @@ const ngAppConfig = ($compileProvider, $translateProvider, Config) => {
 
 const ngAppRun = ($state) => {
   'ngInject';
-  $state.go('app.planesList');
+  $state.go('app.articlesList');
 };
 
 angular.module('ngApp', [
@@ -30,7 +30,7 @@ angular.module('ngApp', [
   'ngApp.core',
   'ngApp.app',
   'ngApp.accounts',
-  'ngApp.planes',
+  'ngApp.articles',
 ])
   .config(ngAppConfig)
   .run(ngAppRun);

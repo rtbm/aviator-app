@@ -1,0 +1,13 @@
+{
+  "ARTICLES": {
+    "NAME": "Name",
+    "CREATE": "Create",
+    "ADD_NEW": "Add new",
+    "CREATED_NEW": "Created new: {{name}}",
+    "UPDATED": "Updated: {{name}}",
+    "DELETED": "Deleted: {{name}}",
+    "EDIT": "Edit",
+    "UPDATE": "Update",
+    "DELETE": "Delete"
+  }
+}
