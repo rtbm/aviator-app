@@ -1,10 +1,10 @@
 function lawnchairService($q) {
   'ngInject';
-  const lawnchairService = function lawnchairService(name, record) {
+  const lawnchairSvc = function lawnchairService(name, record) {
     this.options = { name, record };
   };
 
-  lawnchairService.prototype = {
+  lawnchairSvc.prototype = {
     get(key) {
       const deferred = $q.defer();
 
@@ -54,7 +54,7 @@ function lawnchairService($q) {
     },
   };
 
-  return lawnchairService;
+  return lawnchairSvc;
 }
 
 export { lawnchairService };

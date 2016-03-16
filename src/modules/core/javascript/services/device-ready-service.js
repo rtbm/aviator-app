@@ -1,6 +1,6 @@
 function deviceReadyService($q) {
   'ngInject';
-  function deviceReadyService(cb) {
+  function deviceReadySvc(cb) {
     const deferred = $q.defer();
 
     if ('ontouchstart' in window || navigator.maxTouchPoints) {
@@ -14,7 +14,7 @@ function deviceReadyService($q) {
     return deferred.promise;
   }
 
-  return deviceReadyService;
+  return deviceReadySvc;
 }
 
 export { deviceReadyService };
