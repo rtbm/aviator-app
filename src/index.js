@@ -3,12 +3,12 @@ import './modules/app';
 import './modules/accounts';
 import './modules/articles';
 
-const ngAppConfig = ($compileProvider, $translateProvider, Config) => {
+const ngAppConfig = ($compileProvider, $translateProvider, config) => {
   'ngInject';
   $compileProvider.debugInfoEnabled(false);
-  $translateProvider.registerAvailableLanguageKeys(Config.languages.available);
+  $translateProvider.registerAvailableLanguageKeys(config.languages.available);
   $translateProvider.determinePreferredLanguage();
-  $translateProvider.fallbackLanguage(Config.languages.fallback);
+  $translateProvider.fallbackLanguage(config.languages.fallback);
 };
 
 const ngAppRun = ($state) => {
@@ -31,6 +31,6 @@ angular.module('ngApp', [
   'ngApp.app',
   'ngApp.accounts',
   'ngApp.articles',
-])
-  .config(ngAppConfig)
+
+]).config(ngAppConfig)
   .run(ngAppRun);

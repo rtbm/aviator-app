@@ -1,31 +1,39 @@
-class WeatherService {
-  constructor($q, Config, $http, GlobalsService, DeviceReadyService, LawnchairService, GeolocationService) {
+class weatherService {
+  constructor(config, $q, $http, $globalsService, $deviceReadyService, $lawnchairService,
+              $geolocationService) {
     'ngInject';
     this.$q = $q;
-    this.Config = Config;
+    this.config = config;
     this.$http = $http;
-    this.GlobalsService = GlobalsService;
-    this.DeviceReadyService = DeviceReadyService;
-    this.LawnchairService = LawnchairService;
-    this.GeolocationService = GeolocationService;
+    this.$globalsService = $globalsService;
+    this.$deviceReadyService = $deviceReadyService;
+    this.$lawnchairService = $lawnchairService;
+    this.$geolocationService = $geolocationService;
 
-    this.WeatherHistory = new this.LawnchairService('weathers', 'Weather');
+    this.weatherHistory = new this.$lawnchairService('weathers', 'Weather');
+    this.weather = {};
+
+    this.onInit();
+  }
+
+  onInit() {
+    this.getWeather().then((weather) => { this.weather = weather; });
   }
 
   getWeatherByLatLng(latitude, longitude) {
     return this.$http({
       method: 'GET',
       skipAuthorization: true,
-      url: `http://api.openweathermap.org/data/2.5/weather?APPID=${this.Config.weather_api_key}`
+      url: `http://api.openweathermap.org/data/2.5/weather?APPID=${this.config.weather_api_key}`
       + `&lat=${latitude}&lon=${longitude}&units=metric&lang=`
-      + `${this.GlobalsService.activeLanguage}`
+      + `${this.$globalsService.activeLanguage}`,
     });
   }
 
   getWeather() {
     const deferred = this.$q.defer();
 
-    this.WeatherHistory.all().then((results) => {
+    this.weatherHistory.all().then((results) => {
       const latestWeatherData = results.pop();
 
       if (!!latestWeatherData) {
@@ -36,26 +44,23 @@ class WeatherService {
         }
       }
 
-      this.DeviceReadyService(() => {
-        return this.GeolocationService.getCurrentPosition({
+      this.$deviceReadyService(() => {
+        const geolocationOptions = {
           timeout: 1200000,
-          enableHighAccuracy: true
+          enableHighAccuracy: true,
+        };
 
-        }).then((pos) => {
-          return this.getWeatherByLatLng(
-            pos.coords.latitude,
-            pos.coords.longitude
-          );
+        this.$geolocationService.getCurrentPosition(geolocationOptions)
+          .then((pos) => this.getWeatherByLatLng(pos.coords.latitude, pos.coords.longitude))
+          .then((weather) => {
+            const weatherData = {
+              createdAt: new Date().getTime(),
+              weather: weather.data,
+            };
 
-        }).then((weather) => {
-          const weatherData = {
-            createdAt: new Date().getTime(),
-            weather: weather.data
-          };
-          this.WeatherHistory.save(weatherData);
-
-          deferred.resolve(weatherData);
-        });
+            this.weatherHistory.save(weatherData);
+            deferred.resolve(weatherData);
+          });
       });
     });
 
@@ -63,4 +68,4 @@ class WeatherService {
   }
 }
 
-export { WeatherService };
+export { weatherService };

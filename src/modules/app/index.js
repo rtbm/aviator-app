@@ -1,4 +1,5 @@
-import { AppRoutes } from './javascript/routes/app-routes';
+import { appRoutes } from './javascript/routes/app-routes';
 
 export default angular.module('ngApp.app', [])
-  .config(AppRoutes);
+  .config(appRoutes);
+

@@ -1,11 +1,11 @@
-class ArticlesFormCreateController {
-  constructor(ArticlesService, $translate, $state, NotifyService, ErrorService) {
+class articlesFormCreateController {
+  constructor($translate, $state, $articlesService, $notifyService, $errorService) {
     'ngInject';
     this.$translate = $translate;
     this.$state = $state;
-    this.NotifyService = NotifyService;
-    this.ArticlesService = ArticlesService;
-    this.ErrorService = ErrorService;
+    this.$articlesService = $articlesService;
+    this.$notifyService = $notifyService;
+    this.$errorService = $errorService;
 
     this.onInit();
   }
@@ -15,15 +15,15 @@ class ArticlesFormCreateController {
   }
 
   createAction(Articles) {
-    this.ArticlesService.save(Articles,
+    this.$articlesService.save(Articles,
       (res) => this.handleResponse(res),
-      (err) => this.ErrorService.handleError(err)
+      (err) => this.$errorService.handleError(err)
     );
   }
 
   handleResponse(res) {
     this.$translate(['ARTICLES.CREATED_NEW'], { name: res.name }).then((translations) => {
-      this.NotifyService.show({
+      this.$notifyService.show({
         text: translations['ARTICLES.CREATED_NEW'],
       });
     });
@@ -32,4 +32,4 @@ class ArticlesFormCreateController {
   }
 }
 
-export { ArticlesFormCreateController };
+export { articlesFormCreateController };

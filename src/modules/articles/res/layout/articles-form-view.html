@@ -1,17 +1,17 @@
 <div class="planes form">
     <label>
         <span translate="ARTICLES.NAME"></span>
-        <input type="text" ng-model="ArticlesFormVM.Article.name"
+        <input type="text" ng-model="articlesFormVM.Article.name"
                placeholder="{{ 'ARTICLES.NAME' | translate }}"/>
     </label>
 
-    <div class="actions create" ng-show="ArticlesFormVM.action === 'create'">
-        <button class="primary" ng-click="ArticlesFormVM.createAction(ArticlesFormVM.Article)"
+    <div class="actions create" ng-show="articlesFormVM.action === 'create'">
+        <button class="primary" ng-click="articlesFormVM.createAction(articlesFormVM.Article)"
                 translate="ARTICLES.CREATE"></button>
     </div>
 
-    <div class="actions update" ng-show="ArticlesFormVM.action === 'update'">
-        <button class="primary" ng-click="ArticlesFormVM.updateAction(ArticlesFormVM.Article)"
+    <div class="actions update" ng-show="articlesFormVM.action === 'update'">
+        <button class="primary" ng-click="articlesFormVM.updateAction(articlesFormVM.Article)"
                 translate="ARTICLES.UPDATE"></button>
     </div>
 </div>

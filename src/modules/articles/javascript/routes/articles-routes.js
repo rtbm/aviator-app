@@ -1,4 +1,4 @@
-function ArticlesRoutes($stateProvider) {
+function articlesRoutes($stateProvider) {
   'ngInject';
   $stateProvider
     .state('app.articlesList', {
@@ -6,32 +6,33 @@ function ArticlesRoutes($stateProvider) {
       views: {
         main: {
           templateUrl: 'articles/res/layout/articles-list-view.html',
-          controller: 'ArticlesListController',
-          controllerAs: 'ArticlesListVM',
+          controller: 'articlesListController',
+          controllerAs: 'articlesListVM',
         },
       },
     })
+
     .state('app.articlesFormCreate', {
       url: '/articles/create',
       views: {
         main: {
           templateUrl: 'articles/res/layout/articles-form-view.html',
-          controller: 'ArticlesFormCreateController',
-          controllerAs: 'ArticlesFormVM',
+          controller: 'articlesFormCreateController',
+          controllerAs: 'articlesFormVM',
         },
       },
     })
+
     .state('app.articlesFormEdit', {
       url: '/articles/edit/:articleId',
       views: {
         main: {
           templateUrl: 'articles/res/layout/articles-form-view.html',
-          controller: 'ArticlesFormEditController',
-          controllerAs: 'ArticlesFormVM',
+          controller: 'articlesFormEditController',
+          controllerAs: 'articlesFormVM',
         },
       },
-    })
-  ;
+    });
 }
 
-export { ArticlesRoutes };
+export { articlesRoutes };

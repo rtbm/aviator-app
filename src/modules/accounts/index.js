@@ -1,8 +1,8 @@
-import { AccountsService } from './javascript/services/accounts-service';
-import { AccountsController } from './javascript/controllers/accounts-controller';
-import { AccountsRoutes } from './javascript/routes/accounts-routes';
+import { accountsService } from './javascript/services/accounts-service';
+import { accountsController } from './javascript/controllers/accounts-controller';
+import { accountsRoutes } from './javascript/routes/accounts-routes';
 
-const AccountsConfig = (jwtInterceptorProvider, $httpProvider) => {
+const accountsConfig = (jwtInterceptorProvider, $httpProvider) => {
   'ngInject';
   jwtInterceptorProvider.tokenGetter = (store) => {
     'ngInject';
@@ -11,10 +11,10 @@ const AccountsConfig = (jwtInterceptorProvider, $httpProvider) => {
   $httpProvider.interceptors.push('jwtInterceptor');
 };
 
-const AccountsRun = ($rootScope, AccountsService, $state) => {
+const accountsRun = ($rootScope, $accountsService, $state) => {
   'ngInject';
   $rootScope.$on('$stateChangeStart', (e, toState) => {
-    if (!AccountsService.user && !(!!toState.data && !!toState.data.unprotected)) {
+    if (!$accountsService.user && !(!!toState.data && !!toState.data.unprotected)) {
       e.preventDefault();
       $state.go('accounts');
     }
@@ -22,9 +22,9 @@ const AccountsRun = ($rootScope, AccountsService, $state) => {
 };
 
 export default angular.module('ngApp.accounts', [])
-  .factory('AccountsService', AccountsService)
-  .controller('AccountsController', AccountsController)
-  .config(AccountsRoutes)
-  .config(AccountsConfig)
-  .run(AccountsRun);
+  .factory('$accountsService', accountsService)
+  .controller('accountsController', accountsController)
+  .config(accountsRoutes)
+  .config(accountsConfig)
+  .run(accountsRun);
 

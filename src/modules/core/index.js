@@ -1,19 +1,18 @@
-import { DeviceReadyService } from './javascript/services/device-ready-service';
-import { GlobalsService } from './javascript/services/globals-service';
-import { NotifyService } from './javascript/services/notify-service';
-import { DialogService } from './javascript/services/dialog-service';
-import { GeolocationService } from './javascript/services/geolocation-service';
-import { LawnchairService } from './javascript/services/lawnchair-service';
-import { WeatherService } from './javascript/services/weather-service';
-import { ErrorService } from './javascript/services/error-service';
+import { deviceReadyService } from './javascript/services/device-ready-service';
+import { globalsService } from './javascript/services/globals-service';
+import { notifyService } from './javascript/services/notify-service';
+import { dialogService } from './javascript/services/dialog-service';
+import { geolocationService } from './javascript/services/geolocation-service';
+import { lawnchairService } from './javascript/services/lawnchair-service';
+import { weatherService } from './javascript/services/weather-service';
+import { errorService } from './javascript/services/error-service';
 
 export default angular.module('ngApp.core', [])
-  .factory('DeviceReadyService', DeviceReadyService)
-  .factory('GlobalsService', GlobalsService)
-  .factory('LawnchairService', LawnchairService)
-  .service('ErrorService', ErrorService)
-  .service('NotifyService', NotifyService)
-  .service('DialogService', DialogService)
-  .service('GeolocationService', GeolocationService)
-  .service('WeatherService', WeatherService)
-;
+  .factory('$deviceReadyService', deviceReadyService)
+  .factory('$globalsService', globalsService)
+  .factory('$lawnchairService', lawnchairService)
+  .service('$errorService', errorService)
+  .service('$notifyService', notifyService)
+  .service('$dialogService', dialogService)
+  .service('$geolocationService', geolocationService)
+  .service('$weatherService', weatherService);

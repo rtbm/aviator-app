@@ -1,11 +1,11 @@
-class ArticlesFormEditController {
-  constructor(ArticlesService, $translate, $state, NotifyService, ErrorService) {
+class articlesFormEditController {
+  constructor($translate, $state, $articlesService, $notifyService, $errorService) {
     'ngInject';
     this.$translate = $translate;
     this.$state = $state;
-    this.NotifyService = NotifyService;
-    this.ArticlesService = ArticlesService;
-    this.ErrorService = ErrorService;
+    this.$articlesService = $articlesService;
+    this.$notifyService = $notifyService;
+    this.$errorService = $errorService;
 
     this.onInit();
   }
@@ -13,22 +13,22 @@ class ArticlesFormEditController {
   onInit() {
     this.action = 'update';
 
-    this.ArticlesService.get({ articleId: this.$state.params.articleId },
-      (Article) => { this.Article = Article },
+    this.$articlesService.get({ articleId: this.$state.params.articleId },
+      (Article) => { this.Article = Article; },
       (err) => this.handleError(err)
     );
   }
 
   updateAction(Article) {
-    this.ArticlesService.update(Article,
+    this.$articlesService.update(Article,
       (res) => this.handleResponse(res),
-      (err) => this.ErrorService.handleError(err)
+      (err) => this.$errorService.handleError(err)
     );
   }
 
   handleResponse(res) {
     this.$translate(['ARTICLES.UPDATED'], { name: res.name }).then((translations) => {
-      this.NotifyService.show({
+      this.$notifyService.show({
         text: translations['ARTICLES.UPDATED'],
       });
     });
@@ -37,4 +37,4 @@ class ArticlesFormEditController {
   }
 }
 
-export { ArticlesFormEditController };
+export { articlesFormEditController };

@@ -1,4 +1,4 @@
-function AppRoutes($stateProvider) {
+function appRoutes($stateProvider) {
   'ngInject';
   $stateProvider
     .state('app', {
@@ -8,4 +8,4 @@ function AppRoutes($stateProvider) {
     });
 }
 
-export { AppRoutes };
+export { appRoutes };

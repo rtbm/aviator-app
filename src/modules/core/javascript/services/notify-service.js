@@ -1,4 +1,4 @@
-class NotifyService {
+class notifyService {
   constructor($templateCache, $compile, $rootScope, $timeout) {
     'ngInject';
     this.$templateCache = $templateCache;
@@ -29,4 +29,4 @@ class NotifyService {
   }
 }
 
-export { NotifyService };
+export { notifyService };

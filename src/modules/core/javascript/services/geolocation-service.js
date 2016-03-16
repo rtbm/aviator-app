@@ -1,4 +1,4 @@
-class GeolocationService {
+class geolocationService {
   constructor($q) {
     'ngInject';
     this.$q = $q;
@@ -34,4 +34,4 @@ class GeolocationService {
 
 }
 
-export { GeolocationService };
+export { geolocationService };

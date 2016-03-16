@@ -1,6 +1,6 @@
-function ArticlesService(Config, $resource) {
+function articlesService(config, $resource) {
   'ngInject';
-  return $resource(`${Config.api}/v1/articles/:articleId`, {
+  return $resource(`${config.api}/v1/articles/:articleId`, {
     articleId: '@_id',
   }, {
     update: {
@@ -9,4 +9,4 @@ function ArticlesService(Config, $resource) {
   });
 }
 
-export { ArticlesService };
+export { articlesService };

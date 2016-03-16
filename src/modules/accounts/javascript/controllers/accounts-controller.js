@@ -1,19 +1,11 @@
-class AccountsController {
-  constructor($state, WeatherService, AccountsService) {
+class accountsController {
+  constructor($state, $weatherService, $accountsService) {
     'ngInject';
     this.$state = $state;
-    this.WeatherService = WeatherService;
-    this.AccountsService = AccountsService;
+    this.$weatherService = $weatherService;
+    this.$accountsService = $accountsService;
 
     this.view = '';
-
-    this.onInit();
-  }
-
-  onInit() {
-    this.WeatherService.getWeather().then(
-      (weather) => console.log(weather)
-    );
   }
 
   setViewAction(name) {
@@ -22,20 +14,20 @@ class AccountsController {
   }
 
   signinAction(User) {
-    this.AccountsService.signin(User).then(
+    this.$accountsService.signin(User).then(
       () => this.handleResponse()
     );
   }
 
   signupAction(User) {
-    this.AccountsService.signup(User).then(
+    this.$accountsService.signup(User).then(
       () => this.handleResponse()
     );
   }
 
   handleResponse() {
-    this.$state.go('app.planesList');
+    this.$state.go('app.articlesList');
   }
 }
 
-export { AccountsController };
+export { accountsController };

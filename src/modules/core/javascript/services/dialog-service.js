@@ -1,4 +1,4 @@
-class DialogService {
+class dialogService {
   constructor($templateCache, $compile, $rootScope, $q) {
     'ngInject';
     this.$templateCache = $templateCache;
@@ -33,4 +33,4 @@ class DialogService {
   }
 }
 
-export { DialogService };
+export { dialogService };

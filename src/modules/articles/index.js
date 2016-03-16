@@ -1,12 +1,12 @@
-import { ArticlesService } from './javascript/services/articles-service';
-import { ArticlesListController } from './javascript/controllers/articles-list-controller';
-import { ArticlesFormCreateController } from './javascript/controllers/articles-form-create-controller';
-import { ArticlesFormEditController } from './javascript/controllers/articles-form-edit-controller';
-import { ArticlesRoutes } from './javascript/routes/articles-routes';
+import { articlesService } from './javascript/services/articles-service';
+import { articlesListController } from './javascript/controllers/articles-list-controller';
+import { articlesFormCreateController } from './javascript/controllers/articles-form-create-controller';
+import { articlesFormEditController } from './javascript/controllers/articles-form-edit-controller';
+import { articlesRoutes } from './javascript/routes/articles-routes';
 
 export default angular.module('ngApp.articles', [])
-  .factory('ArticlesService', ArticlesService)
-  .controller('ArticlesListController', ArticlesListController)
-  .controller('ArticlesFormCreateController', ArticlesFormCreateController)
-  .controller('ArticlesFormEditController', ArticlesFormEditController)
-  .config(ArticlesRoutes);
+  .factory('$articlesService', articlesService)
+  .controller('articlesListController', articlesListController)
+  .controller('articlesFormCreateController', articlesFormCreateController)
+  .controller('articlesFormEditController', articlesFormEditController)
+  .config(articlesRoutes);

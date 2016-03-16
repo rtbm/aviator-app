@@ -1,12 +1,12 @@
-function GlobalsService($translate) {
+function globalsService($translate) {
   'ngInject';
   const activeLanguage = $translate.use()
     || $translate.storage().get($translate.storageKey())
     || $translate.preferredLanguage();
 
   return {
-    activeLanguage
+    activeLanguage,
   };
 }
 
-export { GlobalsService };
+export { globalsService };

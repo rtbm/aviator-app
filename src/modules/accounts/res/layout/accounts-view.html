@@ -1,57 +1,63 @@
 <div class="container accounts">
-    <div class="overlay" ng-show="AccountsVM.view === 'signin'">
+    <div class="overlay" ng-show="accountsVM.view === 'signin'">
         <div class="content">
             <h1 translate="ACCOUNTS.LOGIN_TO_EXISTING_ACCOUNT"></h1>
             <div class="form">
                 <label>
                     <span translate="ACCOUNTS.EMAIL"></span>
-                    <input type="text" ng-model="AccountsVM.User.email"
+                    <input type="text" ng-model="accountsVM.User.email"
                            placeholder="{{ 'ACCOUNTS.EMAIL' | translate }}"/>
                 </label>
                 <label>
                     <span translate="ACCOUNTS.PASSWORD"></span>
-                    <input type="password" ng-model="AccountsVM.User.password"
+                    <input type="password" ng-model="accountsVM.User.password"
                            placeholder="{{ 'ACCOUNTS.PASSWORD' | translate }}"/>
                 </label>
             </div>
             <div class="actions">
-                <button class="minor" ng-click="AccountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
-                <button class="primary" ng-click="AccountsVM.signinAction(AccountsVM.User)"
+                <button class="minor" ng-click="accountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
+                <button class="primary" ng-click="accountsVM.signinAction(accountsVM.User)"
                         translate="ACCOUNTS.SIGNIN"></button>
             </div>
         </div>
     </div>
 
-    <div class="overlay" ng-show="AccountsVM.view === 'signup'">
+    <div class="overlay" ng-show="accountsVM.view === 'signup'">
         <div class="content">
             <h1 translate="ACCOUNTS.CREATE_AN_ACCOUNT"></h1>
             <div class="form">
                 <label>
                     <span translate="ACCOUNTS.EMAIL"></span>
-                    <input type="text" ng-model="AccountsVM.User.email"
+                    <input type="text" ng-model="accountsVM.User.email"
                            placeholder="{{ 'ACCOUNTS.EMAIL' | translate }}"/>
                 </label>
                 <label>
                     <span translate="ACCOUNTS.PASSWORD"></span>
-                    <input type="password" ng-model="AccountsVM.User.password"
+                    <input type="password" ng-model="accountsVM.User.password"
                            placeholder="{{ 'ACCOUNTS.PASSWORD' | translate }}"/>
                 </label>
                 <label>
                     <span translate="ACCOUNTS.RETYPE"></span>
-                    <input type="password" ng-model="AccountsVM.User.password_confirmation"
+                    <input type="password" ng-model="accountsVM.User.password_confirmation"
                            placeholder="{{ 'ACCOUNTS.RETYPE_PASSWORD' | translate }}"/>
                 </label>
             </div>
             <div class="actions">
-                <button class="minor" ng-click="AccountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
-                <button class="success" ng-click="AccountsVM.signupAction(AccountsVM.User)"
+                <button class="minor" ng-click="accountsVM.setViewAction('')" translate="ACCOUNTS.BACK"></button>
+                <button class="success" ng-click="accountsVM.signupAction(accountsVM.User)"
                         translate="ACCOUNTS.SIGNUP"></button>
             </div>
         </div>
     </div>
 
+    <div class="weather">
+        <div ng-bind="accountsVM.$weatherService.weather.weather.weather[0].description"></div>
+        <div ng-bind="accountsVM.$weatherService.weather.weather.main.temp"></div>
+        <div ng-bind="accountsVM.$weatherService.weather.weather.wind.speed"></div>
+    </div>
+
     <div class="footer">
-        <button class="primary" ng-click="AccountsVM.setViewAction('signin')" translate="ACCOUNTS.SIGNIN"></button>
-        <button class="success" ng-click="AccountsVM.setViewAction('signup')" translate="ACCOUNTS.SIGNUP"></button>
+        <button class="primary" ng-click="accountsVM.setViewAction('signin')" translate="ACCOUNTS.SIGNIN"></button>
+        <button class="success" ng-click="accountsVM.setViewAction('signup')" translate="ACCOUNTS.SIGNUP"></button>
     </div>
 </div>
