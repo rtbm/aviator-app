@@ -49,7 +49,7 @@
           }
 
           input {
-            max-width: 155px;
+            max-width: 15.5rem;
           }
         }
       }
@@ -75,13 +75,25 @@
     width: 100%;
     position: absolute;
     z-index: 1;
+    padding: 0 1rem;
+    box-sizing: border-box;
 
     button {
-      width: 90%;
+      width: 100%;
 
       &:nth-child(1) {
         margin: 0 0 1rem;
       }
+    }
+  }
+
+  .weather {
+    color: white;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    .description {
+      font-size: 2rem;
     }
   }
 }

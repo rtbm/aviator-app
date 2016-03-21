@@ -1,0 +1,6 @@
+<div class="menu" ng-show="menuVM.$globalsService.menu.visible">
+    <div class="content">
+        <button ng-repeat="item in menuVM.$globalsService.menu.items"
+                ng-click="menuVM.clickAction(item)">{{ item.name | translate }}</button>
+    </div>
+</div>

@@ -11,6 +11,10 @@
     "BACK": "Back",
     "ERROR_409": "Account already exist.",
     "ERROR_422": "Bad credentials or account not exist",
-    "ERROR_DEFAULT": "Error occured. Try again later."
+    "ERROR_DEFAULT": "Error occured. Try again later.",
+    "TEMPERATURE": "Temperature",
+    "TEMPERATURE_MEASURE": "C",
+    "WIND": "Wind",
+    "WIND_MEASURE": "m/s"
   }
 }

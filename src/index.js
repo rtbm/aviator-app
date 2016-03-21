@@ -1,7 +1,9 @@
 import './modules/core';
 import './modules/app';
+import './modules/menu';
 import './modules/accounts';
 import './modules/articles';
+import './modules/topbar';
 
 const ngAppConfig = ($compileProvider, $translateProvider, config) => {
   'ngInject';
@@ -29,8 +31,10 @@ angular.module('ngApp', [
   'ngApp.layouts',
   'ngApp.core',
   'ngApp.app',
+  'ngApp.menu',
   'ngApp.accounts',
   'ngApp.articles',
+  'ngApp.topbar',
 
 ]).config(ngAppConfig)
   .run(ngAppRun);

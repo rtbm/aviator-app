@@ -51,11 +51,18 @@
     </div>
 
     <div class="weather">
-        <div ng-bind="accountsVM.$weatherService.weather.weather.weather[0].description"></div>
-        <div ng-bind="accountsVM.$weatherService.weather.weather.main.temp"></div>
-        <div ng-bind="accountsVM.$weatherService.weather.weather.wind.speed"></div>
+        <div class="description" ng-bind="accountsVM.$weatherService.weather.weather.weather[0].description"></div>
+        <div class="temp">
+            <span translate="ACCOUNTS.TEMPERATURE"></span>:
+            <span ng-bind="accountsVM.$weatherService.weather.weather.main.temp | number: 0"></span>&deg;<span
+                translate="ACCOUNTS.TEMPERATURE_MEASURE"></span>
+        </div>
+        <div class="wind">
+            <span translate="ACCOUNTS.WIND"></span>:
+                <span ng-bind="accountsVM.$weatherService.weather.weather.wind.speed"></span>
+            <span translate="ACCOUNTS.WIND_MEASURE"></span>
+        </div>
     </div>
-
     <div class="footer">
         <button class="primary" ng-click="accountsVM.setViewAction('signin')" translate="ACCOUNTS.SIGNIN"></button>
         <button class="success" ng-click="accountsVM.setViewAction('signup')" translate="ACCOUNTS.SIGNUP"></button>

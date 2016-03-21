@@ -1,6 +1,6 @@
 function lawnchairService($q) {
   'ngInject';
-  const lawnchairSvc = function lawnchairService(name, record) {
+  const lawnchairSvc = function lawnchairSvc(name, record) {
     this.options = { name, record };
   };
 

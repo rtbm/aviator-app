@@ -1,5 +1,4 @@
 <div class="articles list">
-    <button ui-sref="app.articlesFormCreate" translate="ARTICLES.ADD_NEW"></button>
     <div class="item article" ng-repeat="Article in articlesListVM.articles">
         <div ng-bind="Article.name"></div>
         <button ui-sref="app.articlesFormEdit({ articleId: Article._id })" translate="ARTICLES.EDIT"></button>

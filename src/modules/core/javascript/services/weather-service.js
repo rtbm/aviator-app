@@ -62,6 +62,8 @@ class weatherService {
             deferred.resolve(weatherData);
           });
       });
+
+      return true;
     });
 
     return deferred.promise;
