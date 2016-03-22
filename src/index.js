@@ -11,6 +11,7 @@ const ngAppConfig = ($compileProvider, $translateProvider, config) => {
   $translateProvider.registerAvailableLanguageKeys(config.languages.available);
   $translateProvider.determinePreferredLanguage();
   $translateProvider.fallbackLanguage(config.languages.fallback);
+  $translateProvider.useSanitizeValueStrategy('sanitize');
 };
 
 const ngAppRun = ($state) => {
