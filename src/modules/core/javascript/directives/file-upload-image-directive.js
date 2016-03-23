@@ -36,7 +36,7 @@ function fileUploadImageDirective($translate, $dialogService) {
         return reader.readAsDataURL(file);
       });
 
-      scope.$on('$destroy', () => el.unbind('click'));
+      scope.$on('$destroy', () => el.unbind('change'));
     },
   };
 }
