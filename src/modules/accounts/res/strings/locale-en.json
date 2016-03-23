@@ -15,6 +15,7 @@
     "TEMPERATURE": "Temperature",
     "TEMPERATURE_MEASURE": "C",
     "WIND": "Wind",
-    "WIND_MEASURE": "m/s"
+    "WIND_MEASURE": "m/s",
+    "CHECKING_WEATHER_SERVICE": "Checking weather service..."
   }
 }

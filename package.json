@@ -7,7 +7,7 @@
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "gulp build && cordova serve",
-    "device": "gulp build && cordova run",
+    "device": "gulp build --env=production && cordova run",
     "test": "karma start"
   },
   "author": "Marcin Bogusz <marcin@bogusz.cc>",

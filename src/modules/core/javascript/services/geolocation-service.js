@@ -10,7 +10,10 @@ class geolocationService {
     navigator.geolocation.getCurrentPosition(
       (position) => deferred.resolve(position),
       (err) => deferred.reject(err),
-      options
+      options || {
+        enableHighAccuracy: false,
+        timeout: 15000,
+      }
     );
 
     return deferred.promise;
@@ -22,7 +25,10 @@ class geolocationService {
     const watchId = navigator.geolocation.watchPosition(
       (position) => deferred.notify(position),
       (err) => deferred.reject(err),
-      options
+      options || {
+        enableHighAccuracy: true,
+        timeout: 15000,
+      }
     );
 
     deferred.promise.cancel = () => {

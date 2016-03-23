@@ -2,6 +2,7 @@
   "CORE": {
     "OK": "OK",
     "ERROR_OCCURRED": "<p>Ups! We're sorry...<br />Error ({{status}}) occurred.</p><p>Try again later!</p>",
-    "INCORRECT_FILE_FORMAT": "<p>Ups!<br />You are trying to send not allowed file format.<br />Allowed: ({{ext}})</p>"
+    "INCORRECT_FILE_FORMAT": "<p>Ups!<br />You are trying to send not allowed file format.<br />Allowed: ({{ext}})</p>",
+    "CAMERA_ERROR_OCCURRED": "<p>Ups!<br />Something bad happen when trying to get photo!"
   }
 }

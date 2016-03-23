@@ -51,15 +51,18 @@
     </div>
 
     <div class="weather">
-        <div class="description">
-            <span ng-bind="accountsVM.$weatherService.weather.weather.weather[0].description"></span>
-            (<span ng-bind="accountsVM.$weatherService.weather.weather.main.temp | number: 0"></span>&deg;<span
-                translate="ACCOUNTS.TEMPERATURE_MEASURE"></span>)
-        </div>
-        <div class="wind">
-            <span translate="ACCOUNTS.WIND"></span>:
-                <span ng-bind="accountsVM.$weatherService.weather.weather.wind.speed"></span>
-            <span translate="ACCOUNTS.WIND_MEASURE"></span>
+        <div ng-hide="accountsVM.$weatherService.weather.createdAt" translate="ACCOUNTS.CHECKING_WEATHER_SERVICE"></div>
+        <div ng-show="accountsVM.$weatherService.weather.createdAt">
+            <div class="description">
+                <span ng-bind="accountsVM.$weatherService.weather.data.weather[0].description"></span>
+                (<span ng-bind="accountsVM.$weatherService.weather.data.main.temp | number: 0"></span>&deg;<span
+                    translate="ACCOUNTS.TEMPERATURE_MEASURE"></span>)
+            </div>
+            <div class="wind">
+                <span translate="ACCOUNTS.WIND"></span>:
+                    <span ng-bind="accountsVM.$weatherService.weather.data.wind.speed"></span>
+                <span translate="ACCOUNTS.WIND_MEASURE"></span>
+            </div>
         </div>
     </div>
     <div class="footer">

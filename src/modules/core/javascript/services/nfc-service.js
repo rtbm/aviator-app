@@ -27,7 +27,7 @@ function nfcService($q) {
         );
       };
 
-      return q.promise;
+      return deferred.promise;
     },
 
     writeTextRecord: (message) => {

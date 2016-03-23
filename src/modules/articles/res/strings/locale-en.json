@@ -8,6 +8,7 @@
     "DELETED": "Deleted: {{name}}",
     "EDIT": "Edit",
     "UPDATE": "Update",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "GET_PICTURE": "Get picture"
   }
 }

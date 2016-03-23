@@ -4,9 +4,9 @@ function deviceReadyService($q) {
     const deferred = $q.defer();
 
     if ('ontouchstart' in window || navigator.maxTouchPoints) {
-      document.addEventListener('deviceready', deferred.resolve());
+      document.addEventListener('deviceready', () => deferred.resolve());
     } else {
-      angular.element(document).ready(deferred.resolve(), false);
+      angular.element(document).ready(() => deferred.resolve(), false);
     }
 
     $q.when(deferred).then(() => !!cb && cb());

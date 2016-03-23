@@ -45,20 +45,16 @@ class weatherService {
       }
 
       this.$deviceReadyService(() => {
-        const geolocationOptions = {
-          timeout: 1200000,
-          enableHighAccuracy: true,
-        };
-
-        this.$geolocationService.getCurrentPosition(geolocationOptions)
+        this.$geolocationService.getCurrentPosition()
           .then((pos) => this.getWeatherByLatLng(pos.coords.latitude, pos.coords.longitude))
           .then((weather) => {
             const weatherData = {
               createdAt: new Date().getTime(),
-              weather: weather.data,
+              data: weather.data,
             };
 
             this.weatherHistory.save(weatherData);
+
             deferred.resolve(weatherData);
           });
       });
