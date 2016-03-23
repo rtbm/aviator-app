@@ -5,6 +5,13 @@
                placeholder="{{ 'ARTICLES.NAME' | translate }}"/>
     </label>
 
+    <img class="thumbnail" ng-src="{{ articlesFormVM.Article.thumbnail }}"
+         ng-show="articlesFormVM.Article.thumbnail" alt="" />
+
+    <label class="form-input">
+        <input type="file" ng-model="articlesFormVM.Article.thumbnail" file-upload-image />
+    </label>
+
     <div class="actions create" ng-show="articlesFormVM.action === 'create'">
         <button class="primary" ng-click="articlesFormVM.createAction(articlesFormVM.Article)"
                 translate="ARTICLES.CREATE"></button>

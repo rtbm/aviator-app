@@ -51,11 +51,10 @@
     </div>
 
     <div class="weather">
-        <div class="description" ng-bind="accountsVM.$weatherService.weather.weather.weather[0].description"></div>
-        <div class="temp">
-            <span translate="ACCOUNTS.TEMPERATURE"></span>:
-            <span ng-bind="accountsVM.$weatherService.weather.weather.main.temp | number: 0"></span>&deg;<span
-                translate="ACCOUNTS.TEMPERATURE_MEASURE"></span>
+        <div class="description">
+            <span ng-bind="accountsVM.$weatherService.weather.weather.weather[0].description"></span>
+            (<span ng-bind="accountsVM.$weatherService.weather.weather.main.temp | number: 0"></span>&deg;<span
+                translate="ACCOUNTS.TEMPERATURE_MEASURE"></span>)
         </div>
         <div class="wind">
             <span translate="ACCOUNTS.WIND"></span>:

@@ -6,6 +6,7 @@ import { geolocationService } from './javascript/services/geolocation-service';
 import { lawnchairService } from './javascript/services/lawnchair-service';
 import { weatherService } from './javascript/services/weather-service';
 import { errorService } from './javascript/services/error-service';
+import { fileUploadImageDirective } from './javascript/directives/file-upload-image-directive';
 
 export default angular.module('ngApp.core', [])
   .factory('$deviceReadyService', deviceReadyService)
@@ -15,4 +16,5 @@ export default angular.module('ngApp.core', [])
   .service('$notifyService', notifyService)
   .service('$dialogService', dialogService)
   .service('$geolocationService', geolocationService)
-  .service('$weatherService', weatherService);
+  .service('$weatherService', weatherService)
+  .directive('fileUploadImage', fileUploadImageDirective);
