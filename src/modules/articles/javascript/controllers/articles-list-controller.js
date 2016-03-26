@@ -1,10 +1,11 @@
 class articlesListController {
-  constructor($translate, $articlesService, $notifyService, $errorService) {
+  constructor($translate, $articlesService, $notifyService, $errorService, config) {
     'ngInject';
     this.$translate = $translate;
     this.$articlesService = $articlesService;
     this.$notifyService = $notifyService;
     this.$errorService = $errorService;
+    this.config = config;
 
     this.onInit();
   }

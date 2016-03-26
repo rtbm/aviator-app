@@ -1,11 +1,12 @@
 class articlesFormEditController {
-  constructor($translate, $state, $articlesService, $notifyService, $errorService) {
+  constructor($translate, $state, $articlesService, $notifyService, $errorService, config) {
     'ngInject';
     this.$translate = $translate;
     this.$state = $state;
     this.$articlesService = $articlesService;
     this.$notifyService = $notifyService;
     this.$errorService = $errorService;
+    this.config = config;
 
     this.onInit();
   }
@@ -14,7 +15,10 @@ class articlesFormEditController {
     this.action = 'update';
 
     this.$articlesService.get({ articleId: this.$state.params.articleId },
-      (Article) => { this.Article = Article; },
+      (Article) => {
+        this.Article = Article;
+        this.Article.thumbnail = `${this.config.api}/thumbnails/${Article.image}`;
+      },
       (err) => this.handleError(err)
     );
   }
