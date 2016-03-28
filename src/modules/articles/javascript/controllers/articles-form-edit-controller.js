@@ -1,6 +1,11 @@
-class articlesFormEditController {
-  constructor($translate, $state, $articlesService, $notifyService, $errorService, config) {
+import { articlesController } from './articles-controller';
+
+class articlesFormEditController extends articlesController {
+  constructor($translate, $dialogService, $state, $articlesService, $notifyService, $errorService,
+    config) {
     'ngInject';
+    super($translate, $dialogService, $articlesService, $errorService);
+
     this.$translate = $translate;
     this.$state = $state;
     this.$articlesService = $articlesService;
@@ -23,14 +28,7 @@ class articlesFormEditController {
     );
   }
 
-  updateAction(Article) {
-    this.$articlesService.update(Article,
-      (res) => this.handleResponse(res),
-      (err) => this.$errorService.handleError(err)
-    );
-  }
-
-  handleResponse(res) {
+  handleUpdateResponse(res) {
     this.$translate(['ARTICLES.UPDATED'], { name: res.name }).then((translations) => {
       this.$notifyService.show({
         text: translations['ARTICLES.UPDATED'],

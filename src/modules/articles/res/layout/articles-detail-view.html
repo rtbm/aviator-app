@@ -1,0 +1,13 @@
+<div class="articles detail">
+    <div class="article">
+        <span class="title" ng-bind="articlesDetailVM.Article.name"></span>
+
+        <span ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })"
+            class="button button-1 icon-quill"></span>
+        <span class="button button-2 icon-bin"
+            ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)"></span>
+
+        <img ng-src="{{ articlesDetailVM.config.api }}/thumbnails/{{ articlesDetailVM.Article.image }}"
+             alt="{{ articlesDetailVM.Article.name }}" class="thumbnail" />
+    </div>
+</div>

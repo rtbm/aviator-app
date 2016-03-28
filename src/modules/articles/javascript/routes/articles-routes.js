@@ -32,6 +32,17 @@ function articlesRoutes($stateProvider) {
           controllerAs: 'articlesFormVM',
         },
       },
+    })
+
+    .state('app.articlesDetail', {
+      url: '/articles/:articleId',
+      views: {
+        main: {
+          templateUrl: 'articles/res/layout/articles-detail-view.html',
+          controller: 'articlesDetailController',
+          controllerAs: 'articlesDetailVM',
+        },
+      },
     });
 }
 
