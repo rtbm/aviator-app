@@ -1,8 +1,11 @@
 <div class="articles list">
     <div class="item article" ng-repeat="Article in articlesListVM.articles">
-        <div ng-bind="Article.name"></div>
-        <img ng-src="{{ articlesListVM.config.api }}/thumbnails/{{ Article.image }}" alt="{{ Article.name }}" />
-        <button ui-sref="app.articlesFormEdit({ articleId: Article._id })" translate="ARTICLES.EDIT"></button>
-        <button ng-click="articlesListVM.removeAction(Article)" translate="ARTICLES.DELETE"></button>
+        <div class="content">
+            <span class="title" ng-bind="Article.name"></span>
+            <span class="button button-1 icon-quill" ui-sref="app.articlesFormEdit({ articleId: Article._id })"></span>
+            <span class="button button-2 icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
+        </div>
+        <img ng-src="{{ articlesListVM.config.api }}/thumbnails/{{ Article.image }}" alt="{{ Article.name }}"
+             class="thumbnail" />
     </div>
 </div>
