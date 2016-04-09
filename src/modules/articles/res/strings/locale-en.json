@@ -10,6 +10,8 @@
     "UPDATE": "Update",
     "DELETE": "Delete",
     "GET_PICTURE": "Get picture",
-    "DIALOG_REMOVE": "<p>You are going to remove: {{ name }}.</p><p>Are you sure?</p>"
+    "DIALOG_REMOVE": "<p>You are going to remove: {{ name }}.</p><p>Are you sure?</p>",
+    "START": "Start",
+    "STOP": "Stop"
   }
 }
