@@ -33,7 +33,7 @@ class weatherService {
   getWeather() {
     const deferred = this.$q.defer();
 
-    this.weatherHistory.all().then((results) => {
+    this.weatherHistory.all().then(results => {
       const latestWeatherData = results.pop();
 
       if (!!latestWeatherData) {
@@ -46,8 +46,8 @@ class weatherService {
 
       this.$deviceReadyService(() => {
         this.$geolocationService.getCurrentPosition()
-          .then((pos) => this.getWeatherByLatLng(pos.coords.latitude, pos.coords.longitude))
-          .then((weather) => {
+          .then(pos => this.getWeatherByLatLng(pos.coords.latitude, pos.coords.longitude))
+          .then(weather => {
             const weatherData = {
               createdAt: new Date().getTime(),
               data: weather.data,

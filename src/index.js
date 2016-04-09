@@ -4,6 +4,7 @@ import './modules/menu';
 import './modules/accounts';
 import './modules/articles';
 import './modules/topbar';
+import './modules/timers';
 
 const ngAppConfig = ($compileProvider, $translateProvider, config) => {
   'ngInject';
@@ -36,6 +37,6 @@ angular.module('ngApp', [
   'ngApp.accounts',
   'ngApp.articles',
   'ngApp.topbar',
-
+  'ngApp.timers',
 ]).config(ngAppConfig)
   .run(ngAppRun);

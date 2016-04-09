@@ -8,8 +8,8 @@ function lawnchairService($q) {
     get(key) {
       const deferred = $q.defer();
 
-      Lawnchair(this.options, (items) => {
-        items.get(key, (result) => {
+      Lawnchair(this.options, items => {
+        items.get(key, result => {
           deferred.resolve(result);
         });
       });
@@ -20,8 +20,8 @@ function lawnchairService($q) {
     save(item) {
       const deferred = $q.defer();
 
-      Lawnchair(this.options, (items) => {
-        items.save(item, (result) => {
+      Lawnchair(this.options, items => {
+        items.save(item, result => {
           deferred.resolve(result);
         });
       });
@@ -32,8 +32,8 @@ function lawnchairService($q) {
     all() {
       const deferred = $q.defer();
 
-      Lawnchair(this.options, (items) => {
-        items.all((result) => {
+      Lawnchair(this.options, items => {
+        items.all(result => {
           deferred.resolve(result);
         });
       });
@@ -44,8 +44,8 @@ function lawnchairService($q) {
     remove(key) {
       const deferred = $q.defer();
 
-      Lawnchair(this.options, (items) => {
-        items.remove(key, (result) => {
+      Lawnchair(this.options, items => {
+        items.remove(key, result => {
           deferred.resolve(result);
         });
       });

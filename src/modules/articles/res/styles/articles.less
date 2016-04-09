@@ -3,37 +3,35 @@
 .articles {
   .article {
     display: block;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.5rem;
+    border-top: 1px solid darken(@lightgray, 10%);
+    border-bottom: 1px solid darken(@lightgray, 10%);
     box-sizing: border-box;
     position: relative;
     height: 280px;
     overflow: hidden;
 
-    > .title {
+    > .header {
       position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding: .5rem 1rem;
+      background: white;
+      z-index: 5;
+      box-sizing: border-box;
+    }
+
+    > .footer {
+      position: absolute;
+      text-align: right;
       left: 0;
       bottom: 0;
       width: 100%;
-      background: rgba(0,0,0,.8);
       padding: .5rem 1rem;
-      color: white;
-      z-index: 5;
-    }
-
-    > .button {
-      display: block;
-      position: absolute;
-      right: 1rem;
-      font-size: 2.1rem;
-      color: white;
-      z-index: 5;
-
-      &.button-1 {
-        top: 1rem;
-      }
-      &.button-2 {
-        top: 5rem;
-      }
+      background: white;
+      z-index: 10;
+      box-sizing: border-box;
     }
 
     > .thumbnail {
@@ -43,6 +41,11 @@
       position: absolute;
       z-index: 1;
     }
+  }
+
+  &.list {
+    background: @lightgray;
+    padding: 1.5rem 0 0;
   }
 
   &.form {

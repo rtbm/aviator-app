@@ -1,36 +1,32 @@
 class articlesController {
-  constructor($translate, $dialogService, $articlesService, $errorService) {
+  constructor($translate, $dialogService, $articlesService, $timersService, $errorService) {
     'ngInject';
     this.$translate = $translate;
     this.$dialogService = $dialogService;
     this.$articlesService = $articlesService;
+    this.$timersService = $timersService;
     this.$errorService = $errorService;
   }
 
-  createAction(Articles) {
-    this.$articlesService.save(Articles,
-      (res) => this.handleCreateResponse(res),
-      (err) => this.$errorService.handleError(err)
+  createAction(Article) {
+    this.$articlesService.save(Article).$promise.then(
+      res => this.handleCreateResponse(res),
+      err => this.$errorService.handleError(err)
     );
   }
 
   updateAction(Article) {
-    this.$articlesService.update(Article,
-      (res) => this.handleUpdateResponse(res),
-      (err) => this.$errorService.handleError(err)
+    this.$articlesService.update(Article).$promise.then(
+      res => this.handleUpdateResponse(res),
+      err => this.$errorService.handleError(err)
     );
   }
 
   removeAction(Article) {
-    this.$translate(['ARTICLES.DIALOG_REMOVE', 'CORE.OK', 'CORE.CANCEL'], {
-      name: Article.name,
-    }).then(
-      (translations) => this.removeConfirmationDialog(translations).then(
-        (response) => {
-          if (response === 'OK') { this.remove(Article); }
-        }
-      )
-    );
+    this.$translate(['ARTICLES.DIALOG_REMOVE', 'CORE.OK', 'CORE.CANCEL'], { name: Article.name })
+      .then(translations => this.removeConfirmationDialog(translations).then(response => {
+        if (response === 'OK') { this.remove(Article); }
+      }));
   }
 
   removeConfirmationDialog(translations) {
@@ -47,9 +43,30 @@ class articlesController {
   }
 
   remove(Article) {
-    this.$articlesService.remove({ articleId: Article._id },
-      (res) => this.handleRemoveResponse(res),
-      (err) => this.$errorService.handleError(err)
+    this.$articlesService.remove({ articleId: Article._id }).$promise.then(
+      res => this.handleRemoveResponse(res),
+      err => this.$errorService.handleError(err)
+    );
+  }
+
+  startTimerAction(Article) {
+    this.$timersService.save({ articleId: Article._id }, {}).$promise.then(
+      timer => {
+        if (!this.activeTimers) return;
+        this.activeTimers.push(timer.articleId);
+      },
+      err => this.$errorService.handleError(err)
+    );
+  }
+
+  stopTimerAction(Article) {
+    this.$timersService.update({ articleId: Article._id }, {}).$promise.then(
+      timer => {
+        if (!this.activeTimers) return;
+        const index = this.activeTimers.indexOf(timer.articleId);
+        this.activeTimers.splice(index, 1);
+      },
+      err => this.$errorService.handleError(err)
     );
   }
 }

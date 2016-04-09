@@ -1,13 +1,23 @@
 <div class="articles detail">
-    <div class="article">
-        <span class="title" ng-bind="articlesDetailVM.Article.name"></span>
+    <div class="item article">
+        <div class="header">
+            <span class="name" ng-bind="articlesDetailVM.Article.name"></span>
+        </div>
 
-        <span ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })"
-            class="button button-1 icon-quill"></span>
-        <span class="button button-2 icon-bin"
-            ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)"></span>
+        <img class="thumbnail"
+             ng-src="{{ articlesDetailVM.config.api }}/thumbnails/{{ articlesDetailVM.Article.image }}" />
 
-        <img ng-src="{{ articlesDetailVM.config.api }}/thumbnails/{{ articlesDetailVM.Article.image }}"
-             alt="{{ articlesDetailVM.Article.name }}" class="thumbnail" />
+        <div class="footer">
+            <span class="button icon-quill"
+                  ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })"></span>
+
+            <span class="button icon-bin" ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)"></span>
+
+            <button ng-click="articlesDetailVM.startTimerAction(articlesDetailVM.Article)"
+                    ng-show="articlesDetailVM.activeTimers.indexOf(articlesDetailVM.Article._id) === -1">start</button>
+
+            <button ng-click="articlesDetailVM.stopTimerAction(Article)"
+                    ng-show="articlesDetailVM.activeTimers.indexOf(articlesDetailVM.Article._id) !== -1">stop</button>
+        </div>
     </div>
 </div>

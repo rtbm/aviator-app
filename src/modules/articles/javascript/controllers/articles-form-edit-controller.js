@@ -1,10 +1,10 @@
 import { articlesController } from './articles-controller';
 
 class articlesFormEditController extends articlesController {
-  constructor($translate, $dialogService, $state, $articlesService, $notifyService, $errorService,
-    config) {
+  constructor($translate, $dialogService, $state, $articlesService, $timersService, $notifyService,
+              $errorService, config) {
     'ngInject';
-    super($translate, $dialogService, $articlesService, $errorService);
+    super($translate, $dialogService, $articlesService, $timersService, $errorService);
 
     this.$translate = $translate;
     this.$state = $state;
@@ -20,16 +20,16 @@ class articlesFormEditController extends articlesController {
     this.action = 'update';
 
     this.$articlesService.get({ articleId: this.$state.params.articleId },
-      (Article) => {
+      Article => {
         this.Article = Article;
         this.Article.thumbnail = `${this.config.api}/thumbnails/${Article.image}`;
       },
-      (err) => this.handleError(err)
+      err => this.handleError(err)
     );
   }
 
   handleUpdateResponse(res) {
-    this.$translate(['ARTICLES.UPDATED'], { name: res.name }).then((translations) => {
+    this.$translate(['ARTICLES.UPDATED'], { name: res.name }).then(translations => {
       this.$notifyService.show({
         text: translations['ARTICLES.UPDATED'],
       });

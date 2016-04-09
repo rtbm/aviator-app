@@ -18,7 +18,7 @@ function nfcService($q) {
       nfc.addNdefListener(
         () => deferred.resolve(nfcEvent),
         () => deferred.notify(),
-        (err) => deferred.reject(err)
+        err => deferred.reject(err)
       );
 
       deferred.promise.cancel = () => {
@@ -35,8 +35,8 @@ function nfcService($q) {
 
       nfc.write(
         [ndef.textRecord(message)],
-        (nfcEvent) => deferred.resolve(nfcEvent),
-        (err) => deferred.reject(err)
+        nfcEvent => deferred.resolve(nfcEvent),
+        err => deferred.reject(err)
       );
 
       return deferred.promise;
@@ -47,8 +47,8 @@ function nfcService($q) {
 
       nfc.share(
         [ndef.textRecord(message)],
-        (nfcEvent) => deferred.resolve(nfcEvent),
-        (err) => deferred.reject(err)
+        nfcEvent => deferred.resolve(nfcEvent),
+        err => deferred.reject(err)
       );
 
       deferred.promise.cancel = () => {

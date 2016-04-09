@@ -1,10 +1,10 @@
 import { articlesController } from './articles-controller';
 
 class articlesDetailController extends articlesController {
-  constructor($translate, $dialogService, $articlesService, $state, $notifyService, $errorService,
-    config) {
+  constructor($translate, $dialogService, $articlesService, $timersService, $state, $notifyService,
+              $errorService, config) {
     'ngInject';
-    super($translate, $dialogService, $articlesService, $errorService);
+    super($translate, $dialogService, $articlesService, $timersService, $errorService);
 
     this.$translate = $translate;
     this.$articlesService = $articlesService;
@@ -18,13 +18,13 @@ class articlesDetailController extends articlesController {
 
   onInit() {
     this.$articlesService.get({ articleId: this.$state.params.articleId },
-      (Article) => { this.Article = Article; },
-      (err) => this.$errorService.handleError(err)
+      Article => { this.Article = Article; },
+      err => this.$errorService.handleError(err)
     );
   }
 
   handleRemoveResponse(res) {
-    this.$translate(['ARTICLES.DELETED'], { name: res.name }).then((translations) => {
+    this.$translate(['ARTICLES.DELETED'], { name: res.name }).then(translations => {
       this.$notifyService.show({
         text: translations['ARTICLES.DELETED'],
       });

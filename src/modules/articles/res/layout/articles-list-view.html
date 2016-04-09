@@ -1,11 +1,22 @@
 <div class="articles list">
     <div class="item article" ng-repeat="Article in articlesListVM.articles">
-        <span class="title" ng-bind="Article.name"></span>
-
-        <span class="button button-1 icon-quill" ui-sref="app.articlesFormEdit({ articleId: Article._id })"></span>
-        <span class="button button-2 icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
+        <div class="header">
+            <span class="name" ng-bind="Article.name"></span>
+        </div>
 
         <img class="thumbnail" ng-src="{{ articlesListVM.config.api }}/thumbnails/{{ Article.image }}"
              ui-sref="app.articlesDetail({ articleId: Article._id })" alt="{{ Article.name }}" />
+
+        <div class="footer">
+            <span class="button icon-quill" ui-sref="app.articlesFormEdit({ articleId: Article._id })"></span>
+
+            <span class="button icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
+
+            <button ng-click="articlesListVM.startTimerAction(Article)"
+                    ng-show="articlesListVM.activeTimers.indexOf(Article._id) === -1">start</button>
+
+            <button ng-click="articlesListVM.stopTimerAction(Article)"
+                    ng-show="articlesListVM.activeTimers.indexOf(Article._id) !== -1">stop</button>
+        </div>
     </div>
 </div>
