@@ -24,9 +24,9 @@ class articlesController {
 
   removeAction(Article) {
     this.$translate(['ARTICLES.DIALOG_REMOVE', 'CORE.OK', 'CORE.CANCEL'], { name: Article.name })
-      .then(translations => this.removeConfirmationDialog(translations).then(response => {
-        if (response === 'OK') { this.remove(Article); }
-      }));
+      .then(translations => this.removeConfirmationDialog(translations)
+      .then(response => { if (response === 'OK') { this.remove(Article); }})
+    );
   }
 
   removeConfirmationDialog(translations) {
@@ -50,22 +50,19 @@ class articlesController {
   }
 
   startTimerAction(Article) {
+    const article = Article;
+
     this.$timersService.save({ articleId: Article._id }, {}).$promise.then(
-      timer => {
-        if (!this.activeTimers) return;
-        this.activeTimers.push(timer.articleId);
-      },
+      timer => { article.timer = timer._id; },
       err => this.$errorService.handleError(err)
     );
   }
 
   stopTimerAction(Article) {
+    const article = Article;
+
     this.$timersService.update({ articleId: Article._id }, {}).$promise.then(
-      timer => {
-        if (!this.activeTimers) return;
-        const index = this.activeTimers.indexOf(timer.articleId);
-        this.activeTimers.splice(index, 1);
-      },
+      () => { article.timer = null; },
       err => this.$errorService.handleError(err)
     );
   }

@@ -13,10 +13,10 @@
             <span class="button icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
 
             <button ng-click="articlesListVM.startTimerAction(Article)"
-                    ng-show="articlesListVM.activeTimers.indexOf(Article._id) === -1">start</button>
+                    ng-hide="Article.timer">start</button>
 
             <button ng-click="articlesListVM.stopTimerAction(Article)"
-                    ng-show="articlesListVM.activeTimers.indexOf(Article._id) !== -1">stop</button>
+                    ng-show="Article.timer">stop</button>
         </div>
     </div>
 </div>
