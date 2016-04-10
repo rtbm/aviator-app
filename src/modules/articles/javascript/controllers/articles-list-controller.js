@@ -17,12 +17,15 @@ class articlesListController extends articlesController {
   }
 
   onInit() {
-    this.$articlesService.query(
-      articles => { this.articles = articles; },
+    this.$articlesService.query().$promise.then(
+      articles => {
+        console.log(articles);
+        this.articles = articles;
+      },
       err => this.$errorService.handleError(err)
     );
 
-    this.$timersService.query(
+    this.$timersService.query().$promise.then(
       activeTimers => { this.activeTimers = activeTimers; },
       err => this.$errorService.handleError(err)
     );
