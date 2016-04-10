@@ -1,7 +1,7 @@
 import { articlesController } from './articles-controller';
 
 class articlesListController extends articlesController {
-  constructor($translate, $q, $dialogService, $articlesService, $timersService, $notifyService,
+  constructor($translate, $dialogService, $articlesService, $timersService, $notifyService,
               $errorService, config) {
     'ngInject';
     super($translate, $dialogService, $articlesService, $timersService, $errorService);
@@ -19,7 +19,6 @@ class articlesListController extends articlesController {
   onInit() {
     this.$articlesService.query().$promise.then(
       articles => {
-        console.log(articles);
         this.articles = articles;
       },
       err => this.$errorService.handleError(err)

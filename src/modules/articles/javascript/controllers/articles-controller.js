@@ -61,7 +61,7 @@ class articlesController {
   stopTimerAction(Article) {
     const article = Article;
 
-    this.$timersService.update({ articleId: Article._id }, {}).$promise.then(
+    this.$timersService.update({ _id: Article.timer }).$promise.then(
       () => { article.timer = null; },
       err => this.$errorService.handleError(err)
     );
