@@ -8,10 +8,13 @@
              ng-src="{{ articlesDetailVM.config.api }}/thumbnails/{{ articlesDetailVM.Article.image }}" />
 
         <div class="footer">
-            <span class="button icon-quill"
-                  ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })"></span>
 
-            <span class="button icon-bin" ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)"></span>
+            <div class="left">
+                <span class="button icon-quill"
+                      ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })"></span>
+
+                <span class="button icon-bin" ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)"></span>
+            </div>
 
             <button ng-click="articlesDetailVM.startTimerAction(articlesDetailVM.Article)"
                     ng-hide="articlesDetailVM.Article.timer" translate="ARTICLES.START"></button>

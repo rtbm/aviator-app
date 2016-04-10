@@ -8,9 +8,10 @@
              ui-sref="app.articlesDetail({ articleId: Article._id })" alt="{{ Article.name }}" />
 
         <div class="footer">
-            <span class="button icon-quill" ui-sref="app.articlesFormEdit({ articleId: Article._id })"></span>
-
-            <span class="button icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
+            <div class="left">
+                <span class="button icon-quill" ui-sref="app.articlesFormEdit({ articleId: Article._id })"></span>
+                <span class="button icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
+            </div>
 
             <button ng-click="articlesListVM.startTimerAction(Article)" ng-hide="Article.timer"
                     translate="ARTICLES.START"></button>

@@ -23,11 +23,6 @@ class articlesListController extends articlesController {
       },
       err => this.$errorService.handleError(err)
     );
-
-    this.$timersService.query().$promise.then(
-      activeTimers => { this.activeTimers = activeTimers; },
-      err => this.$errorService.handleError(err)
-    );
   }
 
   handleRemoveResponse(res) {
