@@ -17,12 +17,13 @@ function getPictureDirective($translate, $dialogService, $cameraService, $device
       ngModel: '=',
     },
     link: (scope, el) => {
-      el.on('click', () => $deviceReadyService(() => $cameraService.getPicture().then(
-        imageData => {
-          scope.ngModel = `data:image/jpeg;base64,${imageData}`;
-        },
-        err => handleError(err)
-      )));
+      el.on('click', () => $deviceReadyService(
+        () => $cameraService.getPicture().then(
+          imageData => {
+            scope.ngModel = `data:image/jpeg;base64,${imageData}`;
+          },
+          err => handleError(err)
+        )));
 
       scope.$on('$destroy', () => el.unbind('click'));
     },

@@ -4,7 +4,7 @@ import { accountsRoutes } from './javascript/routes/accounts-routes';
 
 const accountsConfig = (jwtInterceptorProvider, $httpProvider) => {
   'ngInject';
-  jwtInterceptorProvider.tokenGetter = (store) => {
+  jwtInterceptorProvider.tokenGetter = store => {
     'ngInject';
     return store.get('jwt');
   };

@@ -19,15 +19,15 @@ function accountsService(config, $translate, $q, $resource, store, jwtHelper, $n
 
     signin: function signin(User) {
       return this.$resource.signin(User,
-        (res) => this.handleResponse(res),
-        (err) => this.handleError(err)
+        res => this.handleResponse(res),
+        err => this.handleError(err)
       ).$promise;
     },
 
     signup: function signup(User) {
       return this.$resource.signup(User,
-        (res) => this.handleResponse(res),
-        (err) => this.handleError(err)
+        res => this.handleResponse(res),
+        err => this.handleError(err)
       ).$promise;
     },
 
@@ -60,11 +60,9 @@ function accountsService(config, $translate, $q, $resource, store, jwtHelper, $n
         }
       }
 
-      $translate([message]).then(
-        (translations) => $notifyService.show({
-          text: translations[message],
-        })
-      );
+      $translate([message]).then(translations => $notifyService.show({
+        text: translations[message],
+      }));
     },
   };
 };

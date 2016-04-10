@@ -112,6 +112,7 @@ gulp.task('build:copy', () => {
     './bower_components/hammer-time/hammer-time.js',
     './bower_components/lawnchair/src/Lawnchair.js',
     './bower_components/lawnchair/src/adapters/dom.js',
+    './bower_components/lawnchair/src/plugins/query.js',
   ])
   .pipe(gulpif(ENV_PRODUCTION, uglify()))
   .pipe(gulp.dest(`${TARGET_DIR}/vendors`));

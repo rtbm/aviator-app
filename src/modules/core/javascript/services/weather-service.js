@@ -17,7 +17,7 @@ class weatherService {
   }
 
   onInit() {
-    this.getWeather().then((weather) => { this.weather = weather; });
+    this.getWeather().then(weather => { this.weather = weather; });
   }
 
   getWeatherByLatLng(latitude, longitude) {

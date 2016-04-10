@@ -1,8 +1,6 @@
 function globalsService($translate) {
   'ngInject';
-  const activeLanguage = $translate.use()
-    || $translate.storage().get($translate.storageKey())
-    || $translate.preferredLanguage();
+  const activeLanguage = $translate.use() || $translate.preferredLanguage();
 
   return {
     activeLanguage,

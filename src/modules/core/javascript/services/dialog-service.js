@@ -16,7 +16,7 @@ class dialogService {
 
     this.scope = this.$rootScope.$new();
     this.scope = angular.extend(this.scope, options);
-    this.scope.resolve = (response) => this.hide(response);
+    this.scope.resolve = response => this.hide(response);
 
     this.dialog = this.$compile(template)(this.scope);
     this.body.append(this.dialog);
