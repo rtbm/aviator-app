@@ -1,11 +1,20 @@
 class articlesController {
-  constructor($translate, $dialogService, $articlesService, $timersService, $errorService) {
+  constructor($translate, $interval, $dialogService, $articlesService, $timersService,
+              $errorService) {
     'ngInject';
     this.$translate = $translate;
+    this.$interval = $interval;
     this.$dialogService = $dialogService;
     this.$articlesService = $articlesService;
     this.$timersService = $timersService;
     this.$errorService = $errorService;
+
+    this.setCurrDate();
+    this.interval = this.$interval(() => { this.setCurrDate(); }, 1000);
+  }
+
+  setCurrDate() {
+    this.currDate = new Date();
   }
 
   createAction(Article) {
@@ -53,7 +62,13 @@ class articlesController {
     const article = Article;
 
     this.$timersService.save({ articleId: Article._id }, {}).$promise.then(
-      timer => { article.timer = timer._id; },
+      timer => {
+        article.timer = timer;
+
+        this.setCurrDate();
+
+        article.timer.createdAt = new Date(article.timer.createdAt);
+      },
       err => this.$errorService.handleError(err)
     );
   }
@@ -61,8 +76,10 @@ class articlesController {
   stopTimerAction(Article) {
     const article = Article;
 
-    this.$timersService.update({ _id: Article.timer }).$promise.then(
-      () => { article.timer = null; },
+    this.$timersService.update({ _id: Article.timer._id }).$promise.then(
+      () => {
+        article.timer = null;
+      },
       err => this.$errorService.handleError(err)
     );
   }

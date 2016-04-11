@@ -13,6 +13,9 @@
                 <span class="button icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
             </div>
 
+            <div class="timer" ng-if="Article.timer"
+                 ng-bind="articlesListVM.currDate - Article.timer.createdAt | date:'H:mm:ss':'+0'"></div>
+
             <button ng-click="articlesListVM.startTimerAction(Article)" ng-hide="Article.timer"
                     translate="ARTICLES.START"></button>
 

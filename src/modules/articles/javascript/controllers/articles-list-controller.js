@@ -1,10 +1,10 @@
 import { articlesController } from './articles-controller';
 
 class articlesListController extends articlesController {
-  constructor($translate, $dialogService, $articlesService, $timersService, $notifyService,
-              $errorService, config) {
+  constructor($translate, $interval, $dialogService, $articlesService, $timersService,
+              $notifyService, $errorService, config) {
     'ngInject';
-    super($translate, $dialogService, $articlesService, $timersService, $errorService);
+    super($translate, $interval, $dialogService, $articlesService, $timersService, $errorService);
 
     this.$translate = $translate;
     this.$articlesService = $articlesService;
@@ -18,7 +18,17 @@ class articlesListController extends articlesController {
 
   onInit() {
     this.$articlesService.query().$promise.then(
-      articles => {
+      result => {
+        const articles = result;
+
+        for (let n = articles.length - 1; n !== -1; n--) {
+          const article = articles[n];
+
+          if (article.timer) {
+            articles[n].timer.createdAt = new Date(article.timer.createdAt);
+          }
+        }
+
         this.articles = articles;
       },
       err => this.$errorService.handleError(err)

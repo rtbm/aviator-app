@@ -1,10 +1,10 @@
 import { articlesController } from './articles-controller';
 
 class articlesDetailController extends articlesController {
-  constructor($translate, $dialogService, $articlesService, $timersService, $state, $notifyService,
-              $errorService, config) {
+  constructor($translate, $interval, $dialogService, $articlesService, $timersService, $state,
+              $notifyService, $errorService, config) {
     'ngInject';
-    super($translate, $dialogService, $articlesService, $timersService, $errorService);
+    super($translate, $interval, $dialogService, $articlesService, $timersService, $errorService);
 
     this.$translate = $translate;
     this.$articlesService = $articlesService;
@@ -18,7 +18,13 @@ class articlesDetailController extends articlesController {
 
   onInit() {
     this.$articlesService.get({ articleId: this.$state.params.articleId },
-      Article => { this.Article = Article; },
+      Article => {
+        this.Article = Article;
+
+        if (this.Article.timer) {
+          this.Article.timer.createdAt = new Date(this.Article.timer.createdAt);
+        }
+      },
       err => this.$errorService.handleError(err)
     );
   }
