@@ -77,9 +77,7 @@ class articlesController {
     const article = Article;
 
     this.$timersService.update({ _id: Article.timer._id }).$promise.then(
-      () => {
-        article.timer = null;
-      },
+      () => { article.timer = null; },
       err => this.$errorService.handleError(err)
     );
   }

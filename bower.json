@@ -5,7 +5,7 @@
   "authors": [
     "Marcin Bogusz <marcin@bogusz.cc>"
   ],
-  "license": "Non-free",
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,7 +15,6 @@
   ],
   "dependencies": {
     "hammerjs": "hammer.js#^2.0.6",
-    "icomoon-bower": "icomoon#^0.1.0",
     "jquery": "^2.2.1",
     "angular-animate": "^1.5.0",
     "angular-resource": "^1.5.0",
@@ -27,7 +26,6 @@
     "roboto-fontface": "^0.4.5",
     "angular-jwt": "^0.0.9",
     "a0-angular-storage": "^0.0.13",
-    "lawnchair": "^0.6.4",
-    "winstore-jscompat": "https://github.com/MSOpenTech/winstore-jscompat/blob/master/winstore-jscompat.js"
+    "lawnchair": "^0.6.4"
   }
 }

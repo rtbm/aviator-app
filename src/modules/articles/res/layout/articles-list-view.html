@@ -9,12 +9,15 @@
 
         <div class="footer">
             <div class="left">
-                <span class="button icon-quill" ui-sref="app.articlesFormEdit({ articleId: Article._id })"></span>
-                <span class="button icon-bin" ng-click="articlesListVM.removeAction(Article)"></span>
+                <span class="button button-icon material-icons"
+                      ui-sref="app.articlesFormEdit({ articleId: Article._id })">mode_edit</span>
+
+                <span class="button button-icon material-icons"
+                      ng-click="articlesListVM.removeAction(Article)">delete_sweep</span>
             </div>
 
             <div class="timer" ng-if="Article.timer"
-                 ng-bind="articlesListVM.currDate - Article.timer.createdAt | date:'H:mm:ss':'+0'"></div>
+                 ng-bind="articlesListVM.currDate - Article.timer.createdAt | timer"></div>
 
             <button ng-click="articlesListVM.startTimerAction(Article)" ng-hide="Article.timer"
                     translate="ARTICLES.START"></button>

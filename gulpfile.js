@@ -85,15 +85,16 @@ gulp.task('build:config', () => {
 gulp.task('build:copy', () => {
   const fonts = gulp.src([
     './bower_components/roboto-fontface/fonts/*.{eot,ijmap,ttf,woff,woff2,svg}',
-    './bower_components/icomoon-bower/fonts/*.{eot,svg,ttf,woff}',
+    './bower_components/material-design-icons/iconfont/*.{eot,svg,ttf,woff,woff2}',
   ])
   .pipe(gulp.dest(`${TARGET_DIR}/fonts`));
 
   const styles = gulp.src([
     './bower_components/roboto-fontface/css/roboto-fontface.css',
-    './bower_components/icomoon-bower/style.css',
+    './bower_components/material-design-icons/iconfont/material-icons.css',
   ])
   .pipe(replace('url(\'../', 'url(\''))
+  .pipe(replace('url(MaterialIcons', 'url(./fonts/MaterialIcons'))
   .pipe(concat('fonts.css'))
   .pipe(gulpif(ENV_PRODUCTION, cssNano()))
   .pipe(gulp.dest(TARGET_DIR));
