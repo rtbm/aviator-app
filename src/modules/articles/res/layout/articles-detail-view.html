@@ -1,5 +1,5 @@
-<div class="articles detail">
-    <div class="item article">
+<div class="articles articles-detail">
+    <div class="article">
         <div class="header">
             <span class="name" ng-bind="articlesDetailVM.Article.name"></span>
         </div>
@@ -27,4 +27,11 @@
                     ng-show="articlesDetailVM.Article.timer" translate="ARTICLES.STOP"></button>
         </div>
     </div>
+
+    <div class="timers">
+        <div ng-repeat="time in articlesDetailVM.timers">
+            <div ng-bind="time.updatedAt - time.createdAt | timer"></div>
+        </div>
+    </div>
 </div>
+

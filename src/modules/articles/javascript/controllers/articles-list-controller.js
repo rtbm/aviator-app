@@ -25,7 +25,7 @@ class articlesListController extends articlesController {
           const article = articles[n];
 
           if (article.timer) {
-            articles[n].timer.createdAt = new Date(article.timer.createdAt);
+            article.timer.createdAt = new Date(article.timer.createdAt);
           }
         }
 

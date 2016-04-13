@@ -17,7 +17,9 @@ class articlesDetailController extends articlesController {
   }
 
   onInit() {
-    this.$articlesService.get({ articleId: this.$state.params.articleId },
+    const articleId = this.$state.params.articleId;
+
+    this.$articlesService.get({ articleId }).$promise.then(
       Article => {
         this.Article = Article;
 
@@ -26,6 +28,21 @@ class articlesDetailController extends articlesController {
         }
       },
       err => this.$errorService.handleError(err)
+    );
+
+    this.$timersService.query({ articleId }).$promise.then(
+      result => {
+        const timers = result;
+
+        for (let n = timers.length - 1; n !== -1; n--) {
+          const timer = timers[n];
+
+          timer.createdAt = new Date(timer.createdAt);
+          timer.updatedAt = new Date(timer.updatedAt);
+        }
+
+        this.timers = timers;
+      }
     );
   }
 
