@@ -9,11 +9,11 @@ class articlesController {
     this.$timersService = $timersService;
     this.$errorService = $errorService;
 
-    this.setCurrDate();
-    this.interval = this.$interval(() => this.setCurrDate(), 1000);
+    this.updateCurrDate();
+    this.interval = this.$interval(() => this.updateCurrDate(), 1000);
   }
 
-  setCurrDate() {
+  updateCurrDate() {
     this.currDate = new Date();
   }
 
@@ -64,10 +64,8 @@ class articlesController {
     this.$timersService.save({ articleId: Article._id }, {}).$promise.then(
       timer => {
         article.timer = timer;
-
-        this.setCurrDate();
-
         article.timer.createdAt = new Date(article.timer.createdAt);
+        this.updateCurrDate();
       },
       err => this.$errorService.handleError(err)
     );

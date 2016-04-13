@@ -1,10 +1,15 @@
 class topbarController {
-  constructor($globalsService) {
+  constructor($globalsService, $state) {
     'ngInject';
     this.$globalsService = $globalsService;
+    this.$state = $state;
   }
 
-  toggleMenu() {
+  goBackAction(toState) {
+    this.$state.go(toState.state.name, toState.params);
+  }
+
+  toggleMenuAction() {
     this.$globalsService.menu.visible = !this.$globalsService.menu.visible;
   }
 }

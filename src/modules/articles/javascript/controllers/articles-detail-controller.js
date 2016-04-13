@@ -2,13 +2,14 @@ import { articlesController } from './articles-controller';
 
 class articlesDetailController extends articlesController {
   constructor($translate, $interval, $dialogService, $articlesService, $timersService, $state,
-              $notifyService, $errorService, config) {
+              $globalsService, $notifyService, $errorService, config) {
     'ngInject';
     super($translate, $interval, $dialogService, $articlesService, $timersService, $errorService);
 
     this.$translate = $translate;
     this.$articlesService = $articlesService;
     this.$state = $state;
+    this.$globalsService = $globalsService;
     this.$notifyService = $notifyService;
     this.$errorService = $errorService;
     this.config = config;
@@ -26,6 +27,9 @@ class articlesDetailController extends articlesController {
         if (this.Article.timer) {
           this.Article.timer.createdAt = new Date(this.Article.timer.createdAt);
         }
+
+        const title = Article.name;
+        this.$globalsService.topbar = angular.extend({}, this.$globalsService.topbar, { title });
       },
       err => this.$errorService.handleError(err)
     );

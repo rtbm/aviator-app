@@ -55,10 +55,12 @@ input[type="text"], input[type="tel"], input[type="password"] {
   height: 4rem;
   line-height: 4rem;
   display: inline-block;
+  vertical-align: middle;
   padding: 0 .5rem;
 
   &.button-icon {
     min-width: 4rem;
+    min-height: 4rem;
     text-transform: none;
     font-weight: normal;
   }
@@ -97,5 +99,17 @@ input[type="text"], input[type="tel"], input[type="password"] {
     &:active {
       background: lighten(@minor, 20%);
     }
+  }
+}
+
+ul.list {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+    padding: .5rem;
+    width: 100%;
+    border-bottom: .1rem solid darken(@lightgray, 10%);
   }
 }

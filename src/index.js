@@ -6,13 +6,9 @@ import './modules/articles';
 import './modules/topbar';
 import './modules/timers';
 
-const ngAppConfig = ($compileProvider, $translateProvider, config) => {
+const ngAppConfig = ($compileProvider) => {
   'ngInject';
   $compileProvider.debugInfoEnabled(false);
-  $translateProvider.registerAvailableLanguageKeys(config.languages.available);
-  $translateProvider.determinePreferredLanguage();
-  $translateProvider.fallbackLanguage(config.languages.fallback);
-  $translateProvider.useSanitizeValueStrategy('sanitize');
 };
 
 const ngAppRun = ($state) => {

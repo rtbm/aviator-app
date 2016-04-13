@@ -1,9 +1,5 @@
 <div class="articles articles-detail">
     <div class="article">
-        <div class="header">
-            <span class="name" ng-bind="articlesDetailVM.Article.name"></span>
-        </div>
-
         <img class="thumbnail"
              ng-src="{{ articlesDetailVM.config.api }}/thumbnails/{{ articlesDetailVM.Article.image }}" />
 
@@ -28,10 +24,10 @@
         </div>
     </div>
 
-    <div class="timers">
-        <div ng-repeat="time in articlesDetailVM.timers">
+    <ul class="list">
+        <li ng-repeat="time in articlesDetailVM.timers">
             <div ng-bind="time.updatedAt - time.createdAt | timer"></div>
-        </div>
-    </div>
+        </li>
+    </ul>
 </div>
 
