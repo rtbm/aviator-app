@@ -44,7 +44,7 @@ class articlesListController extends articlesController {
 
     for (let i = this.articles.length - 1; i !== -1; i--) {
       if (this.articles[i]._id === res._id) {
-        this.articles = this.articles.splice(i, 1);
+        this.articles.splice(i, 1);
         break;
       }
     }

@@ -10,7 +10,7 @@ class articlesController {
     this.$errorService = $errorService;
 
     this.setCurrDate();
-    this.interval = this.$interval(() => { this.setCurrDate(); }, 1000);
+    this.interval = this.$interval(() => this.setCurrDate(), 1000);
   }
 
   setCurrDate() {

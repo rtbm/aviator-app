@@ -8,16 +8,16 @@
              ng-src="{{ articlesDetailVM.config.api }}/thumbnails/{{ articlesDetailVM.Article.image }}" />
 
         <div class="footer">
-
             <div class="left">
-                <span class="button icon-quill"
-                      ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })"></span>
+                <span class="button button-icon material-icons"
+                      ui-sref="app.articlesFormEdit({ articleId: articlesDetailVM.Article._id })">mode_edit</span>
 
-                <span class="button icon-bin" ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)"></span>
+                <span class="button button-icon material-icons"
+                      ng-click="articlesDetailVM.removeAction(articlesDetailVM.Article)">delete</span>
             </div>
 
             <div class="timer" ng-if="articlesDetailVM.Article.timer"
-                 ng-bind="articlesDetailVM.currDate - articlesDetailVM.Article.timer.createdAt | date:'H:mm:ss':'+0'">
+                 ng-bind="articlesDetailVM.currDate - articlesDetailVM.Article.timer.createdAt | timer">
             </div>
 
             <button ng-click="articlesDetailVM.startTimerAction(articlesDetailVM.Article)"
