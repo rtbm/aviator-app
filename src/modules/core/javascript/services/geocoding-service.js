@@ -29,14 +29,14 @@ class geocodingService {
   getLocationFromCache(lat, lng) {
     const deferred = this.$q.defer();
 
-    this.locationHistory.where(`Location.coords = "${lat},${lng}"`).then(locationData => {
-      if (locationData.length) {
-        const location = locationData.shift();
-        return deferred.resolve(location);
-      }
-
-      return deferred.reject();
-    });
+    this.locationHistory.where(`Location.coords = "${lat},${lng}"`).then(
+      locationData => {
+        if (locationData.length) {
+          const location = locationData.shift();
+          return deferred.resolve(location);
+        }
+        return deferred.reject();
+      });
 
     return deferred.promise;
   }
@@ -45,36 +45,37 @@ class geocodingService {
     const deferred = this.$q.defer();
     let position = {};
 
-    this.$geolocationService.getCurrentPosition()
-      .then(pos => {
+    const getLocation = this.$geolocationService.getCurrentPosition().then(
+      pos => {
         position = {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
         };
+
         return this.getLocationFromCache(position.lat, position.lng);
-      })
-      .then(
-        locationData => deferred.resolve(locationData),
-        () => {
-          this.getLocationByLatLng(position.lat, position.lng)
-            .then(location => {
-              const data = {
+      }
+    );
+
+    getLocation.then(
+      locationData => deferred.resolve(locationData),
+      () => {
+        this.getLocationByLatLng(position.lat, position.lng).then(
+          location => {
+            const locationData = {
+              createdAt: new Date().getTime(),
+              coords: `${position.lat},${position.lng}`,
+              data: {
                 pos: location.geometry.location,
                 formatted_address: location.formatted_address,
-              };
+              },
+            };
 
-              const locationData = {
-                createdAt: new Date().getTime(),
-                coords: `${position.lat},${position.lng}`,
-                data,
-              };
-
-              this.locationHistory.save(locationData);
-
-              return deferred.resolve(locationData);
-            });
-        }
-      );
+            this.locationHistory.save(locationData);
+            return deferred.resolve(locationData);
+          }
+        );
+      }
+    );
 
     return deferred.promise;
   }
