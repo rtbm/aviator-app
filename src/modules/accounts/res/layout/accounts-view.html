@@ -54,7 +54,7 @@
         <div ng-hide="accountsVM.$weatherService.weather.createdAt" translate="ACCOUNTS.CHECKING_WEATHER_SERVICE"></div>
         <div ng-show="accountsVM.$weatherService.weather.createdAt">
             <div class="description">
-                <span ng-bind="accountsVM.$weatherService.weather.data.weather[0].description"></span>
+                <span ng-bind="accountsVM.$weatherService.weather.data.weather.description"></span>
                 (<span ng-bind="accountsVM.$weatherService.weather.data.main.temp | number: 0"></span>&deg;<span
                     translate="ACCOUNTS.TEMPERATURE_MEASURE"></span>)
             </div>

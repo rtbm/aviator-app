@@ -96,7 +96,6 @@ gulp.task('build:copy', () => {
   .pipe(replace('url(\'../', 'url(\''))
   .pipe(replace('url(MaterialIcons', 'url(./fonts/MaterialIcons'))
   .pipe(concat('fonts.css'))
-  .pipe(gulpif(ENV_PRODUCTION, cssNano()))
   .pipe(gulp.dest(TARGET_DIR));
 
   const scripts = gulp.src([

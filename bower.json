@@ -1,5 +1,5 @@
 {
-  "name": "aviatorApp",
+  "name": "aviatorapp",
   "description": "",
   "main": "index.js",
   "authors": [
@@ -27,6 +27,7 @@
     "angular-jwt": "^0.0.9",
     "a0-angular-storage": "^0.0.13",
     "lawnchair": "^0.6.4",
-    "material-design-icons": "^2.2.3"
+    "material-design-icons": "^2.2.3",
+    "angular": "^1.5.3"
   }
 }
