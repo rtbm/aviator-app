@@ -60,8 +60,17 @@ class weatherService {
           .then(weather => {
             const weatherData = {
               createdAt: new Date().getTime(),
-              data: weather.data,
+              data: {
+                weather: weather.data.weather[0],
+                main: weather.data.main,
+                clouds: weather.data.clouds,
+                rain: weather.data.rain,
+                snow: weather.data.snow,
+                wind: weather.data.wind,
+              },
             };
+
+            console.log(weatherData);
 
             this.weatherHistory.save(weatherData);
 

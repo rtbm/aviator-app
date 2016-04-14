@@ -1,13 +1,15 @@
 class articlesController {
-  constructor($translate, $interval, $dialogService, $articlesService, $timersService,
-              $geocodingService, $errorService) {
+  constructor($q, $translate, $interval, $dialogService, $articlesService, $timersService,
+              $geocodingService, $weatherService, $errorService) {
     'ngInject';
+    this.$q = $q;
     this.$translate = $translate;
     this.$interval = $interval;
     this.$dialogService = $dialogService;
     this.$articlesService = $articlesService;
     this.$timersService = $timersService;
     this.$geocodingService = $geocodingService;
+    this.$weatherService = $weatherService;
     this.$errorService = $errorService;
 
     this._onInit();
@@ -16,7 +18,6 @@ class articlesController {
   _onInit() {
     this.updateCurrDate();
     this.interval = this.$interval(() => this.updateCurrDate(), 1000);
-    this.$geocodingService.getCurrentLocation();
   }
 
   updateCurrDate() {
@@ -71,26 +72,35 @@ class articlesController {
   startTimerAction(Article) {
     const article = Article;
 
-    this.$geocodingService.getCurrentLocation().then(locationData => {
-      const location = locationData.data;
+    const getData = this.$q.all([
+      this.$geocodingService.getCurrentLocation(),
+      this.$weatherService.getWeather(),
+    ]);
 
-      const req = this.$timersService.save({ articleId: Article._id }, {
-        location,
-      });
+    getData.then(
+      results => {
+        const location = results[0].data;
+        const weather = results[1].data;
 
-      req.$promise.then(
-        timer => {
-          article.timer = timer;
-          article.timer.createdAt = new Date(article.timer.createdAt);
-          this.updateCurrDate();
+        const req = this.$timersService.save({ articleId: Article._id }, {
+          location,
+          weather,
+        });
 
-          if (!!this.timers) {
-            this.timers.push(article.timer);
-          }
-        },
-        err => this.$errorService.handleError(err)
-      );
-    });
+        req.$promise.then(
+          timer => {
+            article.timer = timer;
+            article.timer.createdAt = new Date(article.timer.createdAt);
+            this.updateCurrDate();
+
+            if (!!this.timers) {
+              this.timers.push(article.timer);
+            }
+          },
+          err => this.$errorService.handleError(err)
+        );
+      }
+    );
   }
 
   stopTimerAction(Article) {

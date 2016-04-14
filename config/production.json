@@ -1,6 +1,6 @@
 {
   "config": {
-    "api": "http://192.168.43.218:3000",
+    "api": "https://rtbm.space:3000",
     "weather_api_key": "cf997161c5f8917f5590033ac10ff8f9",
     "languages": {
       "available": ["en"],

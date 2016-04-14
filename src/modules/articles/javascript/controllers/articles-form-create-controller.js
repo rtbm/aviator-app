@@ -1,11 +1,11 @@
 import { articlesController } from './articles-controller';
 
 class articlesFormCreateController extends articlesController {
-  constructor($translate, $interval, $dialogService, $articlesService, $timersService,
-              $geocodingService, $errorService, $state, $notifyService) {
+  constructor($q, $translate, $interval, $dialogService, $articlesService, $timersService,
+              $geocodingService, $weatherService, $errorService, $state, $notifyService) {
     'ngInject';
-    super($translate, $interval, $dialogService, $articlesService, $timersService,
-      $geocodingService, $errorService);
+    super($q, $translate, $interval, $dialogService, $articlesService, $timersService,
+      $geocodingService, $weatherService, $errorService);
 
     this.$translate = $translate;
     this.$state = $state;
