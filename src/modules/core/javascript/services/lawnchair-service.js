@@ -17,6 +17,18 @@ function lawnchairService($q) {
       return deferred.promise;
     },
 
+    where(query) {
+      const deferred = $q.defer();
+
+      Lawnchair(this.options, items => {
+        items.where(query, result => {
+          deferred.resolve(result);
+        });
+      });
+
+      return deferred.promise;
+    },
+
     save(item) {
       const deferred = $q.defer();
 

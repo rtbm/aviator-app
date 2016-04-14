@@ -1,10 +1,11 @@
 import { articlesController } from './articles-controller';
 
 class articlesDetailController extends articlesController {
-  constructor($translate, $interval, $dialogService, $articlesService, $timersService, $state,
-              $globalsService, $notifyService, $errorService, config) {
+  constructor($translate, $interval, $dialogService, $articlesService, $timersService,
+              $geocodingService, $errorService, $state, $globalsService, $notifyService, config) {
     'ngInject';
-    super($translate, $interval, $dialogService, $articlesService, $timersService, $errorService);
+    super($translate, $interval, $dialogService, $articlesService, $timersService,
+      $geocodingService, $errorService);
 
     this.$translate = $translate;
     this.$articlesService = $articlesService;
@@ -23,31 +24,16 @@ class articlesDetailController extends articlesController {
     this.$articlesService.get({ articleId }).$promise.then(
       Article => {
         this.Article = Article;
-
-        if (this.Article.timer) {
-          this.Article.timer.createdAt = new Date(this.Article.timer.createdAt);
-        }
-
-        const title = Article.name;
-        this.$globalsService.topbar = angular.extend({}, this.$globalsService.topbar, { title });
+        this.$globalsService.topbar = angular.extend(
+          {}, this.$globalsService.topbar, { title: Article.name }
+        );
       },
       err => this.$errorService.handleError(err)
     );
 
-    this.$timersService.query({ articleId }).$promise.then(
-      result => {
-        const timers = result;
-
-        for (let n = timers.length - 1; n !== -1; n--) {
-          const timer = timers[n];
-
-          timer.createdAt = new Date(timer.createdAt);
-          timer.updatedAt = new Date(timer.updatedAt);
-        }
-
-        this.timers = timers;
-      }
-    );
+    this.$timersService.query({ articleId }).$promise.then(timers => {
+      this.timers = timers;
+    });
   }
 
   handleRemoveResponse(res) {

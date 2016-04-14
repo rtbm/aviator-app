@@ -2,15 +2,16 @@ import { articlesController } from './articles-controller';
 
 class articlesListController extends articlesController {
   constructor($translate, $interval, $dialogService, $articlesService, $timersService,
-              $notifyService, $errorService, config) {
+              $geocodingService, $errorService, $notifyService, config) {
     'ngInject';
-    super($translate, $interval, $dialogService, $articlesService, $timersService, $errorService);
+    super($translate, $interval, $dialogService, $articlesService, $timersService,
+      $geocodingService, $errorService);
 
     this.$translate = $translate;
-    this.$articlesService = $articlesService;
-    this.$notifyService = $notifyService;
     this.$dialogService = $dialogService;
+    this.$articlesService = $articlesService;
     this.$errorService = $errorService;
+    this.$notifyService = $notifyService;
     this.config = config;
 
     this.onInit();

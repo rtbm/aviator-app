@@ -26,7 +26,9 @@
 
     <ul class="list">
         <li ng-repeat="time in articlesDetailVM.timers">
-            <div ng-bind="time.updatedAt - time.createdAt | timer"></div>
+            <div class="address" ng-bind="time.location.formatted_address"></div>
+            <div class="createdAt" ng-bind="time.createdAt | date: 'dd/MM/yyyy HH:mm'"></div>
+            <div class="countedTime" ng-bind="time.countedTime | timer"></div>
         </li>
     </ul>
 </div>

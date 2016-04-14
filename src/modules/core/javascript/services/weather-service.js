@@ -1,12 +1,10 @@
 class weatherService {
-  constructor(config, $q, $http, $globalsService, $deviceReadyService, $lawnchairService,
-              $geolocationService) {
+  constructor(config, $q, $http, $globalsService, $lawnchairService, $geolocationService) {
     'ngInject';
     this.$q = $q;
     this.config = config;
     this.$http = $http;
     this.$globalsService = $globalsService;
-    this.$deviceReadyService = $deviceReadyService;
     this.$lawnchairService = $lawnchairService;
     this.$geolocationService = $geolocationService;
 
@@ -20,17 +18,17 @@ class weatherService {
     this.getWeather().then(weather => { this.weather = weather; });
   }
 
-  getWeatherByLatLng(latitude, longitude) {
+  getWeatherByLatLng(lat, lng) {
     return this.$http({
       method: 'GET',
       skipAuthorization: true,
       url: `http://api.openweathermap.org/data/2.5/weather?APPID=${this.config.weather_api_key}`
-      + `&lat=${latitude}&lon=${longitude}&units=metric&lang=`
+      + `&lat=${lat}&lon=${lng}&units=metric&lang=`
       + `${this.$globalsService.activeLanguage}`,
     });
   }
 
-  getWeather() {
+  getWeatherFromCache() {
     const deferred = this.$q.defer();
 
     this.weatherHistory.all().then(results => {
@@ -38,14 +36,26 @@ class weatherService {
 
       if (!!latestWeatherData) {
         const expirationTimestamp = latestWeatherData.createdAt + 36000000;
+        const isExpired = expirationTimestamp < new Date().getTime();
 
-        if (expirationTimestamp > new Date().getTime()) {
-          return deferred.resolve(latestWeatherData);
+        if (!isExpired) {
+          deferred.resolve(latestWeatherData);
         }
       }
 
-      this.$deviceReadyService(() => {
-        this.$geolocationService.getCurrentPosition()
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  }
+
+  getWeather() {
+    const deferred = this.$q.defer();
+
+    this.getWeatherFromCache()
+      .then(
+        result => deferred.resolve(result),
+        () => this.$geolocationService.getCurrentPosition()
           .then(pos => this.getWeatherByLatLng(pos.coords.latitude, pos.coords.longitude))
           .then(weather => {
             const weatherData = {
@@ -55,12 +65,9 @@ class weatherService {
 
             this.weatherHistory.save(weatherData);
 
-            deferred.resolve(weatherData);
-          });
-      });
-
-      return true;
-    });
+            return deferred.resolve(weatherData);
+          })
+      );
 
     return deferred.promise;
   }

@@ -7,6 +7,7 @@ import { errorService } from './javascript/services/error-service';
 import { notifyService } from './javascript/services/notify-service';
 import { geolocationService } from './javascript/services/geolocation-service';
 import { weatherService } from './javascript/services/weather-service';
+import { geocodingService } from './javascript/services/geocoding-service';
 import { fileUploadImageDirective } from './javascript/directives/file-upload-image-directive';
 import { getPictureDirective } from './javascript/directives/get-picture-directive';
 
@@ -20,5 +21,6 @@ export default angular.module('ngApp.core', [])
   .service('$notifyService', notifyService)
   .service('$geolocationService', geolocationService)
   .service('$weatherService', weatherService)
+  .service('$geocodingService', geocodingService)
   .directive('fileUploadImage', fileUploadImageDirective)
   .directive('getPicture', getPictureDirective);

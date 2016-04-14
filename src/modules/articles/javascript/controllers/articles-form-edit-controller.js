@@ -1,10 +1,11 @@
 import { articlesController } from './articles-controller';
 
 class articlesFormEditController extends articlesController {
-  constructor($translate, $interval, $dialogService, $state, $articlesService, $timersService,
-              $notifyService, $errorService, config) {
+  constructor($translate, $interval, $dialogService, $articlesService, $timersService,
+              $geocodingService, $errorService, $notifyService, $state, config) {
     'ngInject';
-    super($translate, $interval, $dialogService, $articlesService, $timersService, $errorService);
+    super($translate, $interval, $dialogService, $articlesService, $timersService,
+      $geocodingService, $errorService);
 
     this.$translate = $translate;
     this.$state = $state;

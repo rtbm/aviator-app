@@ -1,16 +1,22 @@
 class articlesController {
   constructor($translate, $interval, $dialogService, $articlesService, $timersService,
-              $errorService) {
+              $geocodingService, $errorService) {
     'ngInject';
     this.$translate = $translate;
     this.$interval = $interval;
     this.$dialogService = $dialogService;
     this.$articlesService = $articlesService;
     this.$timersService = $timersService;
+    this.$geocodingService = $geocodingService;
     this.$errorService = $errorService;
 
+    this._onInit();
+  }
+
+  _onInit() {
     this.updateCurrDate();
     this.interval = this.$interval(() => this.updateCurrDate(), 1000);
+    this.$geocodingService.getCurrentLocation();
   }
 
   updateCurrDate() {
@@ -34,8 +40,12 @@ class articlesController {
   removeAction(Article) {
     this.$translate(['ARTICLES.DIALOG_REMOVE', 'CORE.OK', 'CORE.CANCEL'], { name: Article.name })
       .then(translations => this.removeConfirmationDialog(translations)
-      .then(response => { if (response === 'OK') { this.remove(Article); }})
-    );
+        .then(response => {
+          if (response === 'OK') {
+            this.remove(Article);
+          }
+        })
+      );
   }
 
   removeConfirmationDialog(translations) {
@@ -61,21 +71,44 @@ class articlesController {
   startTimerAction(Article) {
     const article = Article;
 
-    this.$timersService.save({ articleId: Article._id }, {}).$promise.then(
-      timer => {
-        article.timer = timer;
-        article.timer.createdAt = new Date(article.timer.createdAt);
-        this.updateCurrDate();
-      },
-      err => this.$errorService.handleError(err)
-    );
+    this.$geocodingService.getCurrentLocation().then(locationData => {
+      const location = locationData.data;
+
+      const req = this.$timersService.save({ articleId: Article._id }, {
+        location,
+      });
+
+      req.$promise.then(
+        timer => {
+          article.timer = timer;
+          article.timer.createdAt = new Date(article.timer.createdAt);
+          this.updateCurrDate();
+
+          if (!!this.timers) {
+            this.timers.push(article.timer);
+          }
+        },
+        err => this.$errorService.handleError(err)
+      );
+    });
   }
 
   stopTimerAction(Article) {
     const article = Article;
 
     this.$timersService.update({ _id: Article.timer._id }).$promise.then(
-      () => { article.timer = null; },
+      timer => {
+        article.timer = null;
+
+        if (!!this.timers) {
+          for (let n = this.timers.length - 1; n !== -1; n--) {
+            if (this.timers[n]._id === timer._id) {
+              this.timers[n] = timer;
+              break;
+            }
+          }
+        }
+      },
       err => this.$errorService.handleError(err)
     );
   }
