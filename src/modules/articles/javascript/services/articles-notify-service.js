@@ -10,10 +10,31 @@ class articlesNotifyService {
   }
 
   removeNotify(Article) {
-    this.$translate(['ARTICLES.DELETED'], { name: Article.name }).then(translations => {
-      this._removeNotify(translations);
-    });
+    this.$translate(['ARTICLES.DELETED'], { name: Article.name }).then(
+      translations => this._removeNotify(translations)
+    );
   }
+
+  _updateNotify(translations) {
+    this.$notifyService.show({ text: translations['ARTICLES.UPDATED'] });
+  }
+
+  updateNotify(Article) {
+    this.$translate(['ARTICLES.UPDATED'], { name: Article.name }).then(
+      translations => this._updateNotify(translations)
+    );
+  }
+
+  _createNotify(translations) {
+    this.$notifyService.show({ text: translations['ARTICLES.CREATED_NEW'] });
+  }
+
+  createNotify(Article) {
+    this.$translate(['ARTICLES.CREATED_NEW'], { name: Article.name }).then(
+      translations => this._createNotify(translations)
+    );
+  }
+
 }
 
 export { articlesNotifyService };

@@ -1,9 +1,10 @@
 class articlesFormEditController {
-  constructor(config, $state, $articlesService) {
+  constructor(config, $state, $articlesService, $articlesNotifyService) {
     'ngInject';
     this.config = config;
     this.$state = $state;
     this.$articlesService = $articlesService;
+    this.$articlesNotifyService = $articlesNotifyService;
 
     this.onInit();
   }
@@ -21,6 +22,7 @@ class articlesFormEditController {
 
   updateAction(Article) {
     this.$articlesService.update(Article).then(article => {
+      this.$articlesNotifyService.updateNotify(Article);
       this.$state.go('app.articlesDetail', { articleId: article._id });
     });
   }
