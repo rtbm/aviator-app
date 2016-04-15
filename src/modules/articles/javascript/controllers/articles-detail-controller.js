@@ -25,9 +25,15 @@ class articlesDetailController extends articlesController {
     this.$articlesService.get({ articleId }).$promise.then(
       Article => {
         this.Article = Article;
+
+        if (this.Article.timer) {
+          this.Article.timer.createdAt = new Date(this.Article.timer.createdAt);
+        }
+
         this.$globalsService.topbar = angular.extend(
           {}, this.$globalsService.topbar, { title: Article.name }
         );
+
       },
       err => this.$errorService.handleError(err)
     );

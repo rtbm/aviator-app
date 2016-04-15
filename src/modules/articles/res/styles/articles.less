@@ -9,8 +9,6 @@
     border-bottom: .1rem solid darken(@lightgray, 10%);
     box-sizing: border-box;
     position: relative;
-    height: 28rem;
-    overflow: hidden;
 
     > .header {
       position: absolute;
@@ -21,6 +19,10 @@
       background: white;
       z-index: 5;
       box-sizing: border-box;
+    }
+
+    > .thumbnail {
+      width: 100%;
     }
 
     > .footer {
@@ -48,19 +50,23 @@
         font-weight: 700;
       }
     }
-
-    > .thumbnail {
-      width: 100%;
-      top: 0;
-      left: 0;
-      position: absolute;
-      z-index: 1;
-    }
   }
 
   &.articles-list {
     padding: 1.5rem 0 0;
     background: @lightgray;
+
+    > .article {
+      height: 28rem;
+      overflow: hidden;
+
+      & > .thumbnail {
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: 1;
+      }
+    }
   }
 
   &.articles-form {
