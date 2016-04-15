@@ -1,42 +1,28 @@
-import { articlesController } from './articles-controller';
-
-class articlesFormEditController extends articlesController {
-  constructor($q, $translate, $interval, $dialogService, $articlesService, $timersService,
-              $geocodingService, $weatherService, $errorService, $notifyService, $state, config) {
+class articlesFormEditController {
+  constructor(config, $state, $articlesService) {
     'ngInject';
-    super($q, $translate, $interval, $dialogService, $articlesService, $timersService,
-      $geocodingService, $weatherService, $errorService);
-
-    this.$translate = $translate;
+    this.config = config;
     this.$state = $state;
     this.$articlesService = $articlesService;
-    this.$notifyService = $notifyService;
-    this.$errorService = $errorService;
-    this.config = config;
 
     this.onInit();
   }
 
   onInit() {
+    const articleId = this.$state.params.articleId;
+
     this.action = 'update';
 
-    this.$articlesService.get({ articleId: this.$state.params.articleId },
-      Article => {
-        this.Article = Article;
-        this.Article.thumbnail = `${this.config.api}/thumbnails/${Article.image}`;
-      },
-      err => this.handleError(err)
-    );
+    this.$articlesService.findOneById(articleId).then(article => {
+      this.Article = article;
+      this.Article.thumbnail = `${this.config.api}/thumbnails/${this.Article.image}`;
+    });
   }
 
-  handleUpdateResponse(res) {
-    this.$translate(['ARTICLES.UPDATED'], { name: res.name }).then(translations => {
-      this.$notifyService.show({
-        text: translations['ARTICLES.UPDATED'],
-      });
+  updateAction(Article) {
+    this.$articlesService.update(Article).then(article => {
+      this.$state.go('app.articlesDetail', { articleId: article._id });
     });
-
-    this.$state.go('app.articlesList');
   }
 }
 

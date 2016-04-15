@@ -1,17 +1,8 @@
-import { articlesController } from './articles-controller';
-
-class articlesFormCreateController extends articlesController {
-  constructor($q, $translate, $interval, $dialogService, $articlesService, $timersService,
-              $geocodingService, $weatherService, $errorService, $state, $notifyService) {
+class articlesFormCreateController {
+  constructor($state, $articlesService) {
     'ngInject';
-    super($q, $translate, $interval, $dialogService, $articlesService, $timersService,
-      $geocodingService, $weatherService, $errorService);
-
-    this.$translate = $translate;
     this.$state = $state;
     this.$articlesService = $articlesService;
-    this.$notifyService = $notifyService;
-    this.$errorService = $errorService;
 
     this.onInit();
   }
@@ -20,14 +11,10 @@ class articlesFormCreateController extends articlesController {
     this.action = 'create';
   }
 
-  handleCreateResponse(res) {
-    this.$translate(['ARTICLES.CREATED_NEW'], { name: res.name }).then(translations => {
-      this.$notifyService.show({
-        text: translations['ARTICLES.CREATED_NEW'],
-      });
+  createAction(Article) {
+    this.$articlesService.create(Article).then(article => {
+      this.$state.go('app.articlesDetail', { articleId: article._id });
     });
-
-    this.$state.go('app.articlesList');
   }
 }
 

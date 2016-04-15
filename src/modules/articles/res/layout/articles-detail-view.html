@@ -13,7 +13,7 @@
             </div>
 
             <div class="timer" ng-if="articlesDetailVM.Article.timer"
-                 ng-bind="articlesDetailVM.currDate - articlesDetailVM.Article.timer.createdAt | timer">
+                 ng-bind="articlesDetailVM.$timersService.currDate - articlesDetailVM.Article.timer.createdAt | timer">
             </div>
 
             <button ng-click="articlesDetailVM.startTimerAction(articlesDetailVM.Article)"
@@ -26,10 +26,8 @@
 
     <ul class="list">
         <li ng-repeat="time in articlesDetailVM.timers">
-            <div class="address" ng-bind="time.location.formatted_address"></div>
             <div class="createdAt" ng-bind="time.createdAt | date: 'dd/MM/yyyy HH:mm'"></div>
             <div class="countedTime" ng-bind="time.countedTime | timer"></div>
         </li>
     </ul>
 </div>
-

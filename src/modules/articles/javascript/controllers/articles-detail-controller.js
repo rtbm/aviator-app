@@ -1,20 +1,14 @@
-import { articlesController } from './articles-controller';
-
-class articlesDetailController extends articlesController {
-  constructor($q, $translate, $interval, $dialogService, $articlesService, $timersService,
-              $geocodingService, $weatherService, $errorService, $state, $globalsService,
-              $notifyService, config) {
+class articlesDetailController {
+  constructor(config, $state, $topbarService, $articlesService, $timersService,
+              $articlesDialogService, $articlesNotifyService) {
     'ngInject';
-    super($q, $translate, $interval, $dialogService, $articlesService, $timersService,
-      $geocodingService, $weatherService, $errorService);
-
-    this.$translate = $translate;
-    this.$articlesService = $articlesService;
-    this.$state = $state;
-    this.$globalsService = $globalsService;
-    this.$notifyService = $notifyService;
-    this.$errorService = $errorService;
     this.config = config;
+    this.$state = $state;
+    this.$topbarService = $topbarService;
+    this.$articlesService = $articlesService;
+    this.$timersService = $timersService;
+    this.$articlesDialogService = $articlesDialogService;
+    this.$articlesNotifyService = $articlesNotifyService;
 
     this.onInit();
   }
@@ -22,35 +16,42 @@ class articlesDetailController extends articlesController {
   onInit() {
     const articleId = this.$state.params.articleId;
 
-    this.$articlesService.get({ articleId }).$promise.then(
-      Article => {
-        this.Article = Article;
+    this.$articlesService.findOneById(articleId).then(article => {
+      this.Article = article;
+      this.$topbarService.setTitle(this.Article.name);
+    });
 
-        if (this.Article.timer) {
-          this.Article.timer.createdAt = new Date(this.Article.timer.createdAt);
-        }
-
-        this.$globalsService.topbar = angular.extend(
-          {}, this.$globalsService.topbar, { title: Article.name }
-        );
-
-      },
-      err => this.$errorService.handleError(err)
-    );
-
-    this.$timersService.query({ articleId }).$promise.then(timers => {
+    this.$timersService.findAll({ articleId }).then(timers => {
       this.timers = timers;
     });
   }
 
-  handleRemoveResponse(res) {
-    this.$translate(['ARTICLES.DELETED'], { name: res.name }).then(translations => {
-      this.$notifyService.show({
-        text: translations['ARTICLES.DELETED'],
-      });
+  removeAction(Article) {
+    this.$articlesDialogService.removeConfirm(Article).then(result => {
+      if (result === 'OK') {
+        this.$articlesService.remove(Article).then(() => {
+          this.$articlesNotifyService.removeNotify(Article);
+          this.$state.go('app.articlesList');
+        });
+      }
     });
+  }
 
-    this.$state.go('app.articlesList');
+  startTimerAction(Article) {
+    this.$timersService.startTimerAction(Article).then(timer => {
+      this.timers.push(timer);
+    });
+  }
+
+  stopTimerAction(Article) {
+    this.$timersService.stopTimerAction(Article).then(timer => {
+      for (let n = this.timers.length - 1; n !== -1; n--) {
+        if (this.timers[n]._id === timer._id) {
+          this.timers[n] = timer;
+          break;
+        }
+      }
+    });
   }
 }
 

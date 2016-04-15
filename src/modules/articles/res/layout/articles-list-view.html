@@ -17,7 +17,7 @@
             </div>
 
             <div class="timer" ng-if="Article.timer"
-                 ng-bind="articlesListVM.currDate - Article.timer.createdAt | timer"></div>
+                 ng-bind="articlesListVM.$timersService.currDate - Article.timer.createdAt | timer"></div>
 
             <button ng-click="articlesListVM.startTimerAction(Article)" ng-hide="Article.timer"
                     translate="ARTICLES.START"></button>
