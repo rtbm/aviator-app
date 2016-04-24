@@ -8,11 +8,11 @@ class menuController {
       menu: {
         visible: false,
         items: [{
-          name: 'MENU.CREATE_NEW_ARTICLE',
-          sref: 'app.articlesFormCreate',
-        }, {
-          name: 'MENU.ARTICLES',
+          name: 'MENU.SHOW_COLLECTION',
           sref: 'app.articlesList',
+        }, {
+          name: 'MENU.CREATE_NEW',
+          sref: 'app.articlesFormCreate',
         }],
       },
     });

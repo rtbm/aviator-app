@@ -10,9 +10,11 @@
     "UPDATE": "Update",
     "DELETE": "Delete",
     "GET_PICTURE": "Get picture",
-    "DIALOG_REMOVE": "<p>You are going to remove: {{ name }}.</p><p>Are you sure?</p>",
+    "DIALOG_REMOVE": "<p>You are going to remove: <strong>{{ name }}</strong>.</p><p>Are you sure?</p>",
     "START": "Start",
     "STOP": "Stop",
-    "COLLECTION": "Collection"
+    "COLLECTION": "Collection",
+    "TAP_THE_TAG": "<p>You are going to write: <strong>{{ name }}</strong> identifier on NFC TAG.</p><p><i class=\"material-icons\">&#xE1BB;</i></p><p>Tap the tag against the NFC reader on the back of your phone.</p>",
+    "NFC_IS_DISABLED": "<p>NFC reader is disabled. Enable it and try again.</p>"
   }
 }

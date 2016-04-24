@@ -1,25 +1,12 @@
 import { appRoutes } from './javascript/routes/app-routes';
 
-const appConfig = ($translateProvider, $httpProvider, config) => {
+const appConfig = ($translateProvider, config) => {
   'ngInject';
   $translateProvider
     .useSanitizeValueStrategy('sanitize')
     .registerAvailableLanguageKeys(config.languages.available)
     .fallbackLanguage(config.languages.fallback)
     .determinePreferredLanguage();
-
-  const httpProvider = $httpProvider;
-
-  httpProvider.defaults = angular.extend({}, $httpProvider.defaults, {
-    defaults: {
-      headers: {
-        get: {
-          'If-Modified-Since': 'Thu, 1 Jan 1970 00:00:00 GMT',
-          'Cache-Control': 'no-cache',
-        },
-      },
-    },
-  });
 };
 
 const appRun = ($rootScope, $translate, $globalsService) => {

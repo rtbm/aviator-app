@@ -1,12 +1,14 @@
-function nfcService($q) {
+function nfcService($q, $deviceReadyService) {
   'ngInject';
   return {
     isEnabled: () => {
       const deferred = $q.defer();
 
-      nfc.enabled(
-        () => deferred.resolve(),
-        () => deferred.reject()
+      $deviceReadyService().then(
+        () => nfc.enabled(
+          () => deferred.resolve(),
+          () => deferred.reject()
+        )
       );
 
       return deferred.promise;
@@ -16,15 +18,13 @@ function nfcService($q) {
       const deferred = $q.defer();
 
       nfc.addNdefListener(
-        () => deferred.resolve(nfcEvent),
-        () => deferred.notify(),
+        nfcEvent => deferred.notify(nfcEvent),
+        () => {},
         err => deferred.reject(err)
       );
 
       deferred.promise.cancel = () => {
-        nfc.removeNdefListener(
-          () => deferred.resolve(nfcEvent)
-        );
+        nfc.removeNdefListener(() => deferred.resolve());
       };
 
       return deferred.promise;

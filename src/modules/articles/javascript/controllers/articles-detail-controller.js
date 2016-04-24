@@ -1,6 +1,6 @@
 class articlesDetailController {
   constructor(config, $state, $topbarService, $articlesService, $timersService,
-              $articlesDialogService, $articlesNotifyService) {
+              $articlesDialogService, $articlesNotifyService, $articlesNfcService) {
     'ngInject';
     this.config = config;
     this.$state = $state;
@@ -9,6 +9,7 @@ class articlesDetailController {
     this.$timersService = $timersService;
     this.$articlesDialogService = $articlesDialogService;
     this.$articlesNotifyService = $articlesNotifyService;
+    this.$articlesNfcService = $articlesNfcService;
 
     this.onInit();
   }
@@ -52,6 +53,11 @@ class articlesDetailController {
         }
       }
     });
+  }
+
+  writeTag(Article) {
+    const notify = this.$articlesDialogService.nfcWriteNotify(Article);
+    this.$articlesNfcService.write(Article).then(() => notify.cancel());
   }
 }
 
