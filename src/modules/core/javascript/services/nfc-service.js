@@ -19,13 +19,11 @@ function nfcService($q, $deviceReadyService) {
 
       nfc.addNdefListener(
         nfcEvent => deferred.notify(nfcEvent),
-        () => {},
+        () => deferred.notify('LISTENER_SET'),
         err => deferred.reject(err)
       );
 
-      deferred.promise.cancel = () => {
-        nfc.removeNdefListener(() => deferred.resolve());
-      };
+      deferred.promise.cancel = () => nfc.removeNdefListener(() => deferred.resolve());
 
       return deferred.promise;
     },

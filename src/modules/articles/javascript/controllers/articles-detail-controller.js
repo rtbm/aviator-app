@@ -56,8 +56,17 @@ class articlesDetailController {
   }
 
   writeTag(Article) {
-    const notify = this.$articlesDialogService.nfcWriteNotify(Article);
-    this.$articlesNfcService.write(Article).then(() => notify.cancel());
+    this.$articlesNfcService.isReady.promise.then(() => {
+      const writer = this.$articlesNfcService.setWrite(Article._id);
+      const notify = this.$articlesDialogService.nfcWriteNotify(Article);
+
+      writer.then(() => {
+        this.$articlesNotifyService.tagNotify(Article);
+        notify.cancel();
+      });
+
+      notify.then(() => this.$articlesNfcService.setRead());
+    });
   }
 }
 

@@ -5,8 +5,8 @@ class articlesNfcService {
     this.$nfcService = $nfcService;
     this.$interval = $interval;
 
-    this.isReaderEnabled = false;
-    this.listener = false;
+    this.mode = 'read';
+    this.isReady = $q.defer();
 
     this.onInit();
   }
@@ -31,38 +31,52 @@ class articlesNfcService {
 
   addNdefListener() {
     const deferred = this.$q.defer();
-    const listener = this.$nfcService.addNdefListener();
+    this.listener = this.$nfcService.addNdefListener();
 
-    console.log(angular.toJson(listener));
-
-    listener.then(
-      () => {},
+    this.listener.then(
+      null,
       err => deferred.reject(err),
-      nfcEvent => {
-        if (!nfcEvent) {
-          this.isReaderEnabled = true;
-          return deferred.resolve();
-        }
-        return this.onNfcEvent(nfcEvent);
-      }
+      nfcEvent => this.onNfcEvent(this.mode, nfcEvent)
     );
-
-    this.listener = listener;
 
     return deferred.promise;
   }
 
-  onNfcEvent(nfcEvent) {
+  setRead() {
+    this.mode = 'read';
+    this.payload = null;
+
+    return this.listener;
   }
 
-  write(Article) {
+  setWrite(payload) {
     const deferred = this.$q.defer();
 
-    this.$nfcService.isEnabled()
-      .then(() => this.listener ? this.listener.cancel() : this.$q.resolve())
-      .then(() => this.$nfcService.writeTextRecord(Article._id))
-      .then(() => this.addNdefListener())
-      .then(() => deferred.resolve());
+    this.mode = 'write';
+    this.payload = payload;
+
+    this.listener.then(null, null, () => {
+      deferred.resolve();
+    });
+
+    return deferred.promise;
+  }
+
+  onNfcEvent(mode, nfcEvent) {
+    if (nfcEvent === 'LISTENER_SET') { return this.isReady.resolve(); }
+
+    const deferred = this.$q.defer();
+
+    switch (mode) {
+      case 'write': {
+        this.$nfcService.writeTextRecord(this.payload).then(() => deferred.resolve());
+        break;
+      }
+      default: {
+        /* TODO: NFC on READ event */
+        deferred.resolve();
+      }
+    }
 
     return deferred.promise;
   }

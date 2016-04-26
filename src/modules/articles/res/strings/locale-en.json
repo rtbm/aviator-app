@@ -15,6 +15,7 @@
     "STOP": "Stop",
     "COLLECTION": "Collection",
     "TAP_THE_TAG": "<p>You are going to write: <strong>{{ name }}</strong> identifier on NFC TAG.</p><p><i class=\"material-icons\">&#xE1BB;</i></p><p>Tap the tag against the NFC reader on the back of your phone.</p>",
-    "NFC_IS_DISABLED": "<p>NFC reader is disabled. Enable it and try again.</p>"
+    "NFC_IS_DISABLED": "<p>NFC reader is disabled. Enable it and try again.</p>",
+    "TAG_HAS_BEEN_WRITTEN": "Tag has been written with {{ name }} identifier."
   }
 }

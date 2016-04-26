@@ -35,6 +35,16 @@ class articlesNotifyService {
     );
   }
 
+  _tagNotify(translations) {
+    this.$notifyService.show({ text: translations['ARTICLES.TAG_HAS_BEEN_WRITTEN'] });
+  }
+
+  tagNotify(Article) {
+    this.$translate(['ARTICLES.TAG_HAS_BEEN_WRITTEN'], { name: Article.name }).then(
+      translations => this._tagNotify(translations)
+    );
+  }
+
 }
 
 export { articlesNotifyService };

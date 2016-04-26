@@ -42,19 +42,23 @@ class articlesDialogService {
 
   nfcWriteNotify(Article) {
     const deferred = this.$q.defer();
+    let notify;
 
     this.$translate(['ARTICLES.TAP_THE_TAG', 'CORE.CANCEL'], { name: Article.name })
       .then(translations => {
-        const notify = this._nfcWriteNotify(translations);
-        deferred.promise.cancel = notify.cancel;
+        notify = this._nfcWriteNotify(translations);
         return notify;
       })
       .then(result => deferred.resolve(result));
 
+    deferred.promise.cancel = () => {
+      notify.cancel();
+    };
+
     return deferred.promise;
   }
 
-  _nfcDisabledNotify() {
+  _nfcDisabledNotify(translations) {
     return this.$dialogService.show({
       text: translations['ARTICLES.NFC_IS_DISABLED'],
       buttons: [{

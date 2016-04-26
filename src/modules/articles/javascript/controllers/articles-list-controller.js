@@ -1,12 +1,13 @@
 class articlesListController {
   constructor(config, $articlesService, $timersService, $articlesDialogService,
-              $articlesNotifyService) {
+              $articlesNotifyService, $articlesNfcService) {
     'ngInject';
     this.config = config;
     this.$articlesService = $articlesService;
     this.$timersService = $timersService;
     this.$articlesDialogService = $articlesDialogService;
     this.$articlesNotifyService = $articlesNotifyService;
+    this.$articlesNfcService = $articlesNfcService;
 
     this.onInit();
   }
@@ -14,6 +15,11 @@ class articlesListController {
   onInit() {
     this.$articlesService.findAll().then(articles => {
       this.articles = articles;
+    });
+
+    this.$articlesNfcService.isReady.promise.then(() => {
+      const reader = this.$articlesNfcService.setRead();
+      reader.then(null, null, payload => console.log(this.$articlesNfcService.mode));
     });
   }
 
